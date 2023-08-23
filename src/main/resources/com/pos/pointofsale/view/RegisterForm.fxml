@@ -28,7 +28,7 @@
                 <Font name="System Bold" size="13.0" />
              </font>
           </Label>
-          <TextField fx:id="txtEmpID" editable="false" layoutX="25.0" layoutY="129.0" prefHeight="31.0" prefWidth="295.0" promptText="Employee ID" style="-fx-background-color: white; -fx-background-radius: 0px;">
+          <TextField fx:id="txtEmpID" editable="false" focusTraversable="false" layoutX="25.0" layoutY="129.0" prefHeight="31.0" prefWidth="295.0" promptText="Employee ID" style="-fx-background-color: white; -fx-background-radius: 0px;">
          <font>
             <Font size="13.0" />
          </font>

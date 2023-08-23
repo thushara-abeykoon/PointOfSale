@@ -4,7 +4,6 @@ import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -12,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
 
 import java.sql.*;
 
@@ -53,18 +51,19 @@ public class RegisterFormController {
             txtFirstName.requestFocus();
         else if (txtLastName.getText().isEmpty())
             txtLastName.requestFocus();
-        else if (txtEmail.getText().isEmpty()||!registerValidation.isValidEmail(txtEmail.getText())) {
+        else if (txtEmail.getText().isEmpty()||!registerValidation.isValidEmail(txtEmail.getText())||isEmailExists(txtEmail.getText())) {
             txtEmail.clear();
             txtEmail.setStyle("-fx-background-color: white");
             txtEmail.requestFocus();
         }
-        else if (registerValidation.isValidPassword(txtPassword.getText())){
+        else if (registerValidation.invalidPassword(txtPassword.getText())){
             txtPassword.clear();
             txtConfirmPassword.clear();
             txtPasswordsSetBackgroundColor("white");
             txtPassword.requestFocus();
         }
         else{
+
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee(emp_id,fname,lname,email,password) VALUES (?,?,?,?,MD5(?));");
                 preparedStatement.setObject(1,txtEmpID.getText());
@@ -91,13 +90,14 @@ public class RegisterFormController {
 
     private boolean isEmailExists(String email){
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select email from employee where email = ?");
-            preparedStatement.setObject(1,email);
+            PreparedStatement preparedStatement = connection.prepareStatement("select email from employee where email = '"+email+"';");
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next())
+            if (resultSet.next()) {
                 emailExistStatus.setVisible(true);
-            return resultSet.next();
+                return true;
+            }
+            return false;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -106,21 +106,24 @@ public class RegisterFormController {
 
     public void txtEmailOnKeyTyped(KeyEvent keyEvent) {
         emailExistStatus.setVisible(false);
-        if (!registerValidation.isValidEmail(txtEmail.getText()))
+        if (!registerValidation.isValidEmail(txtEmail.getText())||isEmailExists(txtEmail.getText()))
             txtEmail.setStyle("-fx-background-color: #ff7070");
         else
             txtEmail.setStyle("-fx-background-color: white");
     }
 
     public void txtPasswordOnKeyTyped(KeyEvent keyEvent) {
-        if (registerValidation.isValidPassword(txtPassword.getText()))
+        if (registerValidation.invalidPassword(txtPassword.getText()))
             txtPasswordsSetBackgroundColor("#ff7070");
-        else
+        else {
             txtPassword.setStyle("-fx-background-color: white");
+            if (txtPassword.getText().equals(txtConfirmPassword.getText()))
+                txtConfirmPassword.setStyle("-fx-background-color: white");
+        }
     }
 
     public void txtConfirmPasswordOnKeyTyped(KeyEvent keyEvent) {
-        if (!txtPassword.getText().equals(txtConfirmPassword.getText())|| registerValidation.isValidPassword(txtConfirmPassword.getText()))
+        if (!txtPassword.getText().equals(txtConfirmPassword.getText())|| registerValidation.invalidPassword(txtConfirmPassword.getText()))
             txtConfirmPassword.setStyle("-fx-background-color: #ff7070");
         else
             txtPasswordsSetBackgroundColor("white");

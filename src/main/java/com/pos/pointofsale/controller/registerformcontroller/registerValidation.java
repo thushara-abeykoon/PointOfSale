@@ -11,7 +11,7 @@ public class registerValidation {
         return matcher.matches();
     }
 
-    static boolean isValidPassword(String password){
+    static boolean invalidPassword(String password){
         Pattern pattern = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
         Matcher matcher = pattern.matcher(password);
         return !matcher.matches();

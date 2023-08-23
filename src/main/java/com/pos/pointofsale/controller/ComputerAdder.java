@@ -9,7 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,6 +24,8 @@ public class ComputerAdder {
     public AnchorPane computerAdder;
     public MaterialIconView icnClose;
     public Pane draggablePane;
+
+    StageController stageController = new StageController();
 
     public void initialize(){
         ControllerCommon controllerCommon = new ControllerCommon();
@@ -42,9 +47,13 @@ public class ComputerAdder {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Success!!");
                 alert.showAndWait();
                 StageController.closeStage(computerAdder);
+                Stage stage = stageController.loadStage("view/LoginForm.fxml", "Login");
+                stage.centerOnScreen();
+                stage.show();
+
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -59,7 +68,11 @@ public class ComputerAdder {
         ControllerCommon.icnCloseOnMouseExited(icnClose);
     }
 
-    public void icnCloseOnMouseClicked(MouseEvent mouseEvent) {
+    public void icnCloseOnMouseClicked(MouseEvent mouseEvent) throws IOException {
         StageController.closeStage(computerAdder);
+        Stage stage = stageController.loadStage("view/LoginForm.fxml", "Login");
+        stage.centerOnScreen();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
     }
 }

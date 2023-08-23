@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" maxHeight="458.0" maxWidth="352.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.88" prefHeight="398.0" prefWidth="352.0" style="-fx-max-height: 400px; -fx-max-width: 350px; -fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.LoginFormController">
-   <TextField fx:id="txtComputerID" editable="false" focusTraversable="false" layoutX="29.0" layoutY="132.0" prefHeight="31.0" prefWidth="295.0" promptText="Computer ID:" style="-fx-background-color: white; -fx-background-radius: 0px;">
+   <TextField fx:id="txtComputerID" disable="true" editable="false" focusTraversable="false" layoutX="29.0" layoutY="132.0" prefHeight="31.0" prefWidth="295.0" promptText="Computer ID:" style="-fx-background-color: white; -fx-background-radius: 0px;">
       <font>
          <Font size="13.0" />
       </font></TextField>

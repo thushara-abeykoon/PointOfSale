@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="computerAdder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="266.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.ComputerAdder">
+<AnchorPane fx:id="computerAdder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.88" prefHeight="268.0" prefWidth="266.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.ComputerAdder">
    <children>
       <AnchorPane layoutX="1.0" layoutY="1.0" opacity="0.88" prefHeight="265.0" prefWidth="264.0" style="-fx-background-color: black;">
          <children>
-            <Label layoutX="106.0" layoutY="14.0" text="ADD" textFill="WHITE">
+            <Label layoutX="27.0" layoutY="17.0" text="ADD NEW COMPUTER" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <Label layoutX="14.0" layoutY="55.0" text="Computer ID:" textFill="WHITE" />
@@ -24,7 +24,7 @@
             <TextField fx:id="txtComputerId" disable="true" editable="false" focusTraversable="false" layoutX="15.0" layoutY="76.0" prefHeight="25.0" prefWidth="236.0" style="-fx-background-color: white;" />
             <TextField fx:id="txtMacAddress" disable="true" editable="false" focusTraversable="false" layoutX="15.0" layoutY="129.0" prefHeight="25.0" prefWidth="236.0" style="-fx-background-color: white;" />
             <TextField fx:id="txtDescription" layoutX="15.0" layoutY="180.0" prefHeight="25.0" prefWidth="236.0" style="-fx-background-color: white;" />
-            <Button defaultButton="true" layoutX="87.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnOkOnAction" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: blue;" text="OK" textFill="WHITE">
+            <Button defaultButton="true" layoutX="87.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnOkOnAction" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: blue;" text="ADD" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

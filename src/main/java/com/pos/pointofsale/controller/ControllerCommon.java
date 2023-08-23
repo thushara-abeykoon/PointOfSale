@@ -1,18 +1,26 @@
 package com.pos.pointofsale.controller;
 
 import com.pos.pointofsale.database.DatabaseConnector;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.*;
+import java.util.regex.Matcher;
 
 public class ControllerCommon {
     public static Connection connection = DatabaseConnector.getInstance().getConnection();
     private double offset_x;
     private double offset_y;
+
     public static void lblOnMouseMoved(Label lbl){
         lbl.setUnderline(true);
     }
@@ -32,7 +40,17 @@ public class ControllerCommon {
         });
     }
 
-    public static String getID(String tableName, String columnName){
+    public static void icnCloseOnMouseExited(MaterialIconView icn){
+        icn.setFill(Paint.valueOf("#d0d0d0"));
+    }
+    public static void icnCloseOnMouseEntered(MaterialIconView icn){
+        icn.setFill(Paint.valueOf("#ff2700"));
+    }
+
+    public static String getID(String tableName, String columnName,String firstLetters){
+        if (firstLetters.length()!=3)
+            throw new RuntimeException("Wrong letter input!");
+
         String empId;
         try {
             Statement statement = connection.createStatement();
@@ -47,11 +65,29 @@ public class ControllerCommon {
                     return empId.substring(0,empId.length()-empIdInt.length()).concat(empIdInt);
             }
             else
-                return "EMP0001";
+                return firstLetters+"0001";
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String getMacAddress(){
+        try{
+            InetAddress localhost = InetAddress.getLocalHost();
+            NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localhost);
+            byte [] macAddressBytes = networkInterface.getHardwareAddress();
+
+            StringBuilder macAddress = new StringBuilder();
+
+            for (byte macAddressByte : macAddressBytes) {
+                macAddress.append(String.format("%02X", macAddressByte));
+            }
+            return macAddress.toString();
+        }catch(UnknownHostException |SocketException e){
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

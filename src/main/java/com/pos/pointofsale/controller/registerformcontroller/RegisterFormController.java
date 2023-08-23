@@ -31,22 +31,22 @@ public class RegisterFormController {
     public void initialize(){
         ControllerCommon controllerCommon = new ControllerCommon();
         controllerCommon.dragPane(draggablePane,root);
-        txtEmpID.setText(ControllerCommon.getID("employee","emp_id"));
+        txtEmpID.setText(ControllerCommon.getID("employee","emp_id","EMP"));
     }
 
-    public void icnCloseOnClicked(MouseEvent mouseEvent) {
+    public void icnCloseOnClicked() {
         StageController.closeStage(root);
     }
 
-    public void icnCloseOnMouseEntered(MouseEvent mouseEvent) {
+    public void icnCloseOnMouseEntered() {
         icnClose.setFill(Paint.valueOf("#ff2700"));
     }
 
-    public void icnCloseOnMouseExited(MouseEvent mouseEvent) {
+    public void icnCloseOnMouseExited() {
         icnClose.setFill(Paint.valueOf("#d0d0d0"));
     }
 
-    public void btnRegisterOnAction(ActionEvent event) {
+    public void btnRegisterOnAction() {
         if (txtFirstName.getText().isEmpty())
             txtFirstName.requestFocus();
         else if (txtLastName.getText().isEmpty())
@@ -104,7 +104,7 @@ public class RegisterFormController {
 
     }
 
-    public void txtEmailOnKeyTyped(KeyEvent keyEvent) {
+    public void txtEmailOnKeyTyped() {
         emailExistStatus.setVisible(false);
         if (!registerValidation.isValidEmail(txtEmail.getText())||isEmailExists(txtEmail.getText()))
             txtEmail.setStyle("-fx-background-color: #ff7070");
@@ -112,7 +112,7 @@ public class RegisterFormController {
             txtEmail.setStyle("-fx-background-color: white");
     }
 
-    public void txtPasswordOnKeyTyped(KeyEvent keyEvent) {
+    public void txtPasswordOnKeyTyped() {
         if (registerValidation.invalidPassword(txtPassword.getText()))
             txtPasswordsSetBackgroundColor("#ff7070");
         else {

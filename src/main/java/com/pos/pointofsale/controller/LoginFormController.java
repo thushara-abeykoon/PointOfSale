@@ -1,6 +1,7 @@
 package com.pos.pointofsale.controller;
 
 import com.pos.pointofsale.StageController;
+import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -14,6 +15,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginFormController {
 
@@ -25,10 +30,35 @@ public class LoginFormController {
     public TextField txtComputerID;
     public TextField txtEmployeeID;
     public Pane draggablePane;
+    public Label lblAddThisComputer;
+
+    private static final Connection connection = DatabaseConnector.getInstance().getConnection();
+
     public void initialize(){
         ControllerCommon controllerCommon = new ControllerCommon();
         controllerCommon.dragPane(draggablePane,root);
+        if (isMacAvailable(ControllerCommon.getMacAddress())){
+            lblAddThisComputer.setVisible(false);
+            txtComputerID.setText();
+        }
+
     }
+
+
+    public void setComputerId(String computerId){
+        lblAddThisComputer.setVisible(false);
+        txtComputerID.setText(computerId);
+    }
+    public boolean isMacAvailable(String macAddress){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT mac_address FROM computer where mac_address = '" + macAddress + "';");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void txtPasswordOnAction(ActionEvent event) {
 
     }
@@ -36,12 +66,12 @@ public class LoginFormController {
     public void btnLoginOnAction(ActionEvent event) {
     }
 
-    public void lblForgotPasswordOnMouseMoved(MouseEvent mouseEvent) {
+    public void lblForgotPasswordOnMouseEntered(MouseEvent mouseEvent) {
         ControllerCommon.lblOnMouseMoved(lblForgotPassword);
     }
 
     public void lblForgotPasswordOnMouseExited(MouseEvent mouseEvent) {
-        ControllerCommon.lblOnMouseMoved(lblForgotPassword);
+        ControllerCommon.lblOnMouseExited(lblForgotPassword);
     }
 
     public void lblCreateNewAccountOnMouseEntered(MouseEvent mouseEvent) {
@@ -69,10 +99,26 @@ public class LoginFormController {
     }
 
     public void icnCloseOnMouseExited(MouseEvent mouseEvent) {
-        icnClose.setFill(Paint.valueOf("#d0d0d0"));
+        ControllerCommon.icnCloseOnMouseExited(icnClose);
     }
 
     public void icnCloseOnMouseEntered(MouseEvent mouseEvent) {
-        icnClose.setFill(Paint.valueOf("#ff2700"));
+        ControllerCommon.icnCloseOnMouseEntered(icnClose);
+    }
+
+
+    public void lblAddThisComputerOnMouseEntered(MouseEvent mouseEvent) {
+        ControllerCommon.lblOnMouseMoved(lblAddThisComputer);
+    }
+
+    public void lblAddThisComputerOnMouseExited(MouseEvent mouseEvent) {
+        ControllerCommon.lblOnMouseExited(lblAddThisComputer);
+    }
+
+    public void lblAddThisComputerOnMouseClicked(MouseEvent mouseEvent) throws IOException {
+        StageController stageController = new StageController();
+        Stage stage = stageController.loadStage("view/ComputerAdder.fxml", "Add Computer");
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
     }
 }

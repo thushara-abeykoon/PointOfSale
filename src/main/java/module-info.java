@@ -12,4 +12,6 @@ module com.pos.pointofsale {
     opens com.pos.pointofsale.controller to javafx.fxml;
     exports com.pos.pointofsale.controller.registerformcontroller;
     opens com.pos.pointofsale.controller.registerformcontroller to javafx.fxml;
+    exports com.pos.pointofsale.controller.cashierdashboard;
+    opens com.pos.pointofsale.controller.cashierdashboard to javafx.fxml;
 }

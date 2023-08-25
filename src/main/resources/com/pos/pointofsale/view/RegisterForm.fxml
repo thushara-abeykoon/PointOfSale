@@ -32,6 +32,9 @@
          <font>
             <Font size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
       </TextField>
           <Label layoutX="25.0" layoutY="171.0" text="First Name:" textFill="WHITE">
              <font>
@@ -41,7 +44,10 @@
           <TextField fx:id="txtFirstName" layoutX="25.0" layoutY="191.0" prefHeight="31.0" prefWidth="295.0" promptText="First Name" style="-fx-background-color: white; -fx-background-radius: 0px;">
          <font>
             <Font size="13.0" />
-         </font></TextField>
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
           <Label layoutX="24.0" layoutY="240.0" text="Last Name:" textFill="WHITE">
              <font>
                 <Font name="System Bold" size="13.0" />
@@ -50,7 +56,10 @@
           <TextField fx:id="txtLastName" layoutX="24.0" layoutY="260.0" prefHeight="31.0" prefWidth="295.0" promptText="Last Name" style="-fx-background-color: white; -fx-background-radius: 0px;">
          <font>
             <Font size="13.0" />
-         </font></TextField>
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
           <Label layoutX="25.0" layoutY="305.0" text="Email:" textFill="WHITE">
              <font>
                 <Font name="System Bold" size="13.0" />
@@ -59,7 +68,10 @@
           <TextField fx:id="txtEmail" layoutX="25.0" layoutY="325.0" onKeyTyped="#txtEmailOnKeyTyped" prefHeight="31.0" prefWidth="295.0" promptText="Email" style="-fx-background-color: white; -fx-background-radius: 0px;">
          <font>
             <Font size="13.0" />
-         </font></TextField>
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
           <Label layoutX="25.0" layoutY="366.0" text="Phone No:" textFill="WHITE">
              <font>
                 <Font name="System Bold" size="13.0" />
@@ -69,6 +81,9 @@
          <font>
             <Font size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
       </TextField>
           <Label layoutX="25.0" layoutY="431.0" text="Password:" textFill="WHITE">
              <font>
@@ -78,7 +93,10 @@
       <PasswordField fx:id="txtPassword" layoutX="24.0" layoutY="449.0" onKeyTyped="#txtPasswordOnKeyTyped" prefHeight="31.0" prefWidth="295.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 0px;">
          <font>
             <Font size="13.0" />
-         </font></PasswordField>
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></PasswordField>
           <Label layoutX="24.0" layoutY="493.0" text="Confirm Password:" textFill="WHITE">
              <font>
                 <Font name="System Bold" size="13.0" />
@@ -87,7 +105,10 @@
       <PasswordField fx:id="txtConfirmPassword" layoutX="24.0" layoutY="511.0" onKeyTyped="#txtConfirmPasswordOnKeyTyped" prefHeight="31.0" prefWidth="295.0" promptText="Confirm Password" style="-fx-background-color: white; -fx-background-radius: 0px;">
          <font>
             <Font size="13.0" />
-         </font></PasswordField>
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></PasswordField>
           <Button layoutX="97.0" layoutY="582.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: green; -fx-background-radius: 0px;" text="Register" textFill="WHITE">
              <cursor>
                 <Cursor fx:constant="HAND" />

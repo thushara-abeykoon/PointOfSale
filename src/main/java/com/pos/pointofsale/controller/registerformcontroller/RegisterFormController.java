@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterFormController {
     public MaterialIconView icnClose;
@@ -32,6 +34,7 @@ public class RegisterFormController {
         ControllerCommon controllerCommon = new ControllerCommon();
         controllerCommon.dragPane(draggablePane,root);
         txtEmpID.setText(ControllerCommon.getID("employee","emp_id","EMP"));
+        txtPhoneNoEventFilter();
     }
 
     public void icnCloseOnClicked() {
@@ -61,8 +64,10 @@ public class RegisterFormController {
             txtConfirmPassword.clear();
             txtPasswordsSetBackgroundColor("white");
             txtPassword.requestFocus();
-        }
-        else{
+        } else if (registerValidation.invalidMobileNumber(txtPhoneNo.getText())) {
+            txtPhoneNo.clear();
+            txtPhoneNo.requestFocus();
+        } else{
 
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee(emp_id,fname,lname,email,password) VALUES (?,?,?,?,MD5(?));");
@@ -132,5 +137,16 @@ public class RegisterFormController {
     public void txtPasswordsSetBackgroundColor(String color){
         txtPassword.setStyle("-fx-background-color: "+color);
         txtConfirmPassword.setStyle("-fx-background-color: "+color);
+    }
+
+
+    public void txtPhoneNoEventFilter(){
+        txtPhoneNo.addEventFilter(KeyEvent.KEY_TYPED, event->{
+            String character = event.getCharacter();
+
+            String allowedCharacters = "0123456789";
+            if (!allowedCharacters.contains(character))
+                event.consume();
+        });
     }
 }

@@ -17,4 +17,10 @@ public class registerValidation {
         return !matcher.matches();
     }
 
+    static boolean invalidMobileNumber(String mobileNum){
+        Pattern pattern = Pattern.compile("^(?:\\+94|0)[1-9][0-9]{8}$");
+        Matcher matcher = pattern.matcher(mobileNum);
+        return !matcher.matches();
+    }
+
 }

@@ -92,11 +92,17 @@ public class LoginFormController {
                 int status = preparedStatement.executeUpdate();
                 if (status>0){
                     StageController.closeStage(root);
+                    StageController stageController = new StageController();
+                    Stage stage = stageController.loadStage("view/CashierDashboard.fxml", "Cashier Dashboard");
+                    stage.setMaximized(true);
+                    stage.centerOnScreen();
+                    stage.show();
                 }
-            } catch (SQLException e) {
+            } catch (SQLException | IOException e) {
                 throw new RuntimeException(e);
             }
         }
+
     }
 
     public void lblForgotPasswordOnMouseEntered(MouseEvent mouseEvent) {

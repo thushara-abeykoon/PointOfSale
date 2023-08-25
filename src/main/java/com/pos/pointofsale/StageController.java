@@ -6,6 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class StageController {
     public Stage loadStage(String fxml, String title, AnchorPane root) throws IOException {
@@ -22,7 +23,7 @@ public class StageController {
     }
 
     private Scene loadScene(String fxml) throws IOException {
-        return new Scene(FXMLLoader.load(this.getClass().getResource(fxml)));
+        return new Scene(FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource(fxml))));
     }
 
     public static void closeStage(AnchorPane anchorPane){

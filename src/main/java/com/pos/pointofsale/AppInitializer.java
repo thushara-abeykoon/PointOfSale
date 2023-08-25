@@ -8,11 +8,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(this.getClass().getResource("view/LoginForm.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("view/LoginForm.fxml")));
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         stage.setTitle("Login");

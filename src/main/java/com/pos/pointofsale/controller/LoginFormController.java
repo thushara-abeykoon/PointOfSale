@@ -3,22 +3,17 @@ package com.pos.pointofsale.controller;
 import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.io.PipedReader;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class LoginFormController {
 
@@ -68,12 +63,15 @@ public class LoginFormController {
         }
     }
 
-    public void txtPasswordOnAction(ActionEvent event) {
-
+    public void txtPasswordOnAction() {
+        login();
     }
 
-    public void btnLoginOnAction(ActionEvent event) {
+    public void btnLoginOnAction() {
+        login();
+    }
 
+    public void login(){
         if (txtComputerID.getText().isEmpty())
             return;
 
@@ -86,7 +84,7 @@ public class LoginFormController {
         }
         else{
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee_computer(emp_id,cmp_id,login,logout) VALUES (?,?,current_timestamp(),current_timestamp())");
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee_computer (emp_id,cmp_id,login,logout) VALUES (?,?,current_timestamp(),current_timestamp())");
                 preparedStatement.setObject(1,txtEmployeeID.getText());
                 preparedStatement.setObject(2,txtComputerID.getText());
                 int status = preparedStatement.executeUpdate();
@@ -102,30 +100,29 @@ public class LoginFormController {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
-    public void lblForgotPasswordOnMouseEntered(MouseEvent mouseEvent) {
+    public void lblForgotPasswordOnMouseEntered() {
         ControllerCommon.lblOnMouseMoved(lblForgotPassword);
     }
 
-    public void lblForgotPasswordOnMouseExited(MouseEvent mouseEvent) {
+    public void lblForgotPasswordOnMouseExited() {
         ControllerCommon.lblOnMouseExited(lblForgotPassword);
     }
 
-    public void lblCreateNewAccountOnMouseEntered(MouseEvent mouseEvent) {
+    public void lblCreateNewAccountOnMouseEntered() {
         ControllerCommon.lblOnMouseMoved(lblCreateNewAccount);
     }
 
-    public void lblCreateNewAccountOnMouseExited(MouseEvent mouseEvent) {
+    public void lblCreateNewAccountOnMouseExited() {
         ControllerCommon.lblOnMouseExited(lblCreateNewAccount);
     }
 
-    public void lblForgotPasswordOnMouseClicked(MouseEvent mouseEvent) {
+    public void lblForgotPasswordOnMouseClicked() {
 
     }
 
-    public void lblCreateNewAccountOnMouseClicked(MouseEvent mouseEvent) throws IOException {
+    public void lblCreateNewAccountOnMouseClicked() throws IOException {
         StageController stageController = new StageController();
         Stage register = stageController.loadStage("view/RegisterForm.fxml", "Register");
         register.initStyle(StageStyle.UNDECORATED);
@@ -133,28 +130,28 @@ public class LoginFormController {
         register.show();
     }
 
-    public void icnCloseOnClicked(MouseEvent mouseEvent) {
+    public void icnCloseOnClicked() {
         StageController.closeStage(root);
     }
 
-    public void icnCloseOnMouseExited(MouseEvent mouseEvent) {
+    public void icnCloseOnMouseExited() {
         ControllerCommon.icnCloseOnMouseExited(icnClose);
     }
 
-    public void icnCloseOnMouseEntered(MouseEvent mouseEvent) {
+    public void icnCloseOnMouseEntered() {
         ControllerCommon.icnCloseOnMouseEntered(icnClose);
     }
 
 
-    public void lblAddThisComputerOnMouseEntered(MouseEvent mouseEvent) {
+    public void lblAddThisComputerOnMouseEntered() {
         ControllerCommon.lblOnMouseMoved(lblAddThisComputer);
     }
 
-    public void lblAddThisComputerOnMouseExited(MouseEvent mouseEvent) {
+    public void lblAddThisComputerOnMouseExited() {
         ControllerCommon.lblOnMouseExited(lblAddThisComputer);
     }
 
-    public void lblAddThisComputerOnMouseClicked(MouseEvent mouseEvent) throws IOException {
+    public void lblAddThisComputerOnMouseClicked() throws IOException {
         StageController.closeStage(root);
         StageController stageController = new StageController();
         Stage stage = stageController.loadStage("view/ComputerAdder.fxml", "Add Computer");

@@ -4,17 +4,16 @@ import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
-import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 
-import java.sql.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RegisterFormController {
     public MaterialIconView icnClose;
@@ -54,7 +53,7 @@ public class RegisterFormController {
             txtFirstName.requestFocus();
         else if (txtLastName.getText().isEmpty())
             txtLastName.requestFocus();
-        else if (txtEmail.getText().isEmpty()||!registerValidation.isValidEmail(txtEmail.getText())||isEmailExists(txtEmail.getText())) {
+        else if (txtEmail.getText().isEmpty()|| registerValidation.isvalidEmail(txtEmail.getText()) ||isEmailExists(txtEmail.getText())) {
             txtEmail.clear();
             txtEmail.setStyle("-fx-background-color: white");
             txtEmail.requestFocus();
@@ -111,7 +110,7 @@ public class RegisterFormController {
 
     public void txtEmailOnKeyTyped() {
         emailExistStatus.setVisible(false);
-        if (!registerValidation.isValidEmail(txtEmail.getText())||isEmailExists(txtEmail.getText()))
+        if (registerValidation.isvalidEmail(txtEmail.getText()) ||isEmailExists(txtEmail.getText()))
             txtEmail.setStyle("-fx-background-color: #ff7070");
         else
             txtEmail.setStyle("-fx-background-color: white");
@@ -127,7 +126,7 @@ public class RegisterFormController {
         }
     }
 
-    public void txtConfirmPasswordOnKeyTyped(KeyEvent keyEvent) {
+    public void txtConfirmPasswordOnKeyTyped() {
         if (!txtPassword.getText().equals(txtConfirmPassword.getText())|| registerValidation.invalidPassword(txtConfirmPassword.getText()))
             txtConfirmPassword.setStyle("-fx-background-color: #ff7070");
         else

@@ -1,18 +1,23 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
-import javafx.animation.FadeTransition;
+import com.pos.pointofsale.StageController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class CashierDashboardController extends DashboardStyleConfiguration {
@@ -35,6 +40,7 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
     public Label lblSettings;
     public Label lblLogout;
     public static boolean isOptionVisible = false;
+    public BorderPane root;
 
     public void imgMoreOnMouseClicked(MouseEvent mouseEvent) {
 
@@ -75,6 +81,15 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
 
 
     public void paneDashboardOnMouseClicked(MouseEvent mouseEvent) {
+
+        StageController stageController = new StageController();
+        try {
+            Parent parent = stageController.loadScene("view/DashboardForm.fxml").getRoot();
+            root.setCenter(parent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void paneOrderOnMouseClicked(MouseEvent mouseEvent) {
@@ -99,7 +114,6 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
     //Mouse Hover Settings
 
     public void paneDashboardOnMouseEntered( ) {
-
         setPaneBackground(paneDashboard,"#282929");
     }
 

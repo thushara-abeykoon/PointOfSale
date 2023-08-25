@@ -13,6 +13,7 @@ import java.util.Objects;
 public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+
         Parent parent = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("view/LoginForm.fxml")));
         Scene scene = new Scene(parent);
         stage.setScene(scene);

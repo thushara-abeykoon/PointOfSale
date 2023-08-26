@@ -3,6 +3,7 @@ package com.pos.pointofsale.controller;
 import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -27,7 +28,10 @@ public class LoginFormController {
     public Pane draggablePane;
     public Label lblAddThisComputer;
     private static final Connection connection = DatabaseConnector.getInstance().getConnection();
-
+    public static String empId;
+    public static String cmpId;
+    public static String logId;
+    public static Scene scene;
 
 
     public void initialize(){
@@ -88,18 +92,33 @@ public class LoginFormController {
                 preparedStatement.setObject(1,txtEmployeeID.getText());
                 preparedStatement.setObject(2,txtComputerID.getText());
                 int status = preparedStatement.executeUpdate();
+                getLogId();
                 if (status>0){
-                    StageController.closeStage(root);
+                    cmpId = txtComputerID.getText();
+                    empId = txtEmployeeID.getText();
                     StageController stageController = new StageController();
-                    Stage stage = stageController.loadStage("view/CashierDashboard.fxml", "Cashier Dashboard");
-                    stage.setMaximized(true);
+                    scene = stageController.loadScene("view/CashierDashboard.fxml");
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
                     stage.centerOnScreen();
+                    stage.setMaximized(true);
                     stage.show();
+                    StageController.closeStage(root);
                 }
             } catch (SQLException | IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private void getLogId() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT log_id FROM employee_computer ORDER BY log_id desc LIMIT 1;");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next())
+            logId = resultSet.getString(1);
+        else
+            throw new SQLException();
+
     }
 
     public void lblForgotPasswordOnMouseEntered() {

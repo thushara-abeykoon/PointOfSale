@@ -26,7 +26,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             <VBox.margin>
-               <Insets bottom="10.0" />
+               <Insets />
             </VBox.margin>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -48,7 +48,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             <VBox.margin>
-               <Insets bottom="10.0" />
+               <Insets />
             </VBox.margin>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -70,7 +70,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             <VBox.margin>
-               <Insets bottom="10.0" />
+               <Insets />
             </VBox.margin>
             <ImageView fitHeight="49.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -92,7 +92,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             <VBox.margin>
-               <Insets bottom="10.0" />
+               <Insets />
             </VBox.margin>
             <ImageView fitHeight="43.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -109,12 +109,12 @@
                </cursor>
             </Label>
          </Pane>
-         <Pane fx:id="paneEmployeeDetails" layoutX="10.0" layoutY="130.0" onMouseClicked="#paneEmpoyeeDetailsOnMouseClicked" onMouseEntered="#paneEmployeeDetailsOnMouseEntered" onMouseExited="#paneEmployeeDetailsOnMouseExited" prefHeight="60.0" prefWidth="64.0">
+         <Pane fx:id="paneEmployeeDetails" layoutX="10.0" layoutY="130.0" onMouseClicked="#paneEmployeeDetailsOnMouseClicked" onMouseEntered="#paneEmployeeDetailsOnMouseEntered" onMouseExited="#paneEmployeeDetailsOnMouseExited" prefHeight="60.0" prefWidth="64.0">
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
             <VBox.margin>
-               <Insets bottom="10.0" />
+               <Insets />
             </VBox.margin>
             <ImageView fitHeight="49.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -136,7 +136,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             <VBox.margin>
-               <Insets bottom="10.0" />
+               <Insets />
             </VBox.margin>
             <ImageView fitHeight="43.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
@@ -146,7 +146,7 @@
             </ImageView>
             <Label fx:id="lblSettings" layoutX="55.0" layoutY="17.0" text="SETTINGS" textFill="WHITE" visible="false">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -170,7 +170,7 @@
             </ImageView>
             <Label fx:id="lblLogout" layoutX="55.0" layoutY="17.0" text="LOG OUT" textFill="WHITE" visible="false">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

@@ -91,7 +91,7 @@
                      </contextMenu>
                   </TextField>
                   <TextField fx:id="txtItemPrice" disable="true" opacity="0.75" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtItemQuantity" onAction="#txtItemQuantityOnAction" onKeyTyped="#txtItemQuantityOnKeyTyped" style="-fx-background-color: #b5b5b5;" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtItemQuantity" onAction="#txtItemQuantityOnAction" style="-fx-background-color: #b5b5b5;" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                   <TextField fx:id="txtTotal" disable="true" opacity="0.75" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                </children>
             </GridPane>

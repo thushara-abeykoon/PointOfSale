@@ -5,6 +5,7 @@ import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.controller.LoginFormController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.OrderTable;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableArray;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -58,27 +60,51 @@ public class OrderController {
         txtItemQuantityFilter();
         txtItemQuantityOnKeyPressed();
         lblOrderId.setText(orderIdGenerator());
-        onSelectTableRow();
+       // onSelectTableRow();
+        onContextMenuRequestedOnTableRow();
     }
 
-    public void onSelectTableRow(){
-        tblViewOrder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                OrderTable orderTable = tblViewOrder.getSelectionModel().getSelectedItem();
-                if (orderTable==null)
-                    return;
-                txtItemId.setText(orderTable.getItemId());
-                txtItemName.setText(orderTable.getItemName());
-                txtItemPrice.setText(orderTable.getPrice());
-                txtItemQuantity.setText(orderTable.getQuantity());
-                txtTotal.setText(orderTable.getTotal());
-                editItemIndex = (int) t1;
-                isOnEdit=true;
-                txtItemName.requestFocus();
-            }
-        });
 
+    public void onContextMenuRequestedOnTableRow(){
+        tblViewOrder.setRowFactory(
+                new Callback<TableView<OrderTable>, TableRow<OrderTable>>() {
+                    @Override
+                    public TableRow<OrderTable> call(TableView<OrderTable> orderTableTableView) {
+                        final TableRow<OrderTable> row = new TableRow<>();
+                        ContextMenu contextMenu = new ContextMenu();
+
+                        MenuItem edit = new MenuItem("Edit");
+                        edit.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                OrderTable orderTable = tblViewOrder.getSelectionModel().getSelectedItem();
+                                if (orderTable==null)
+                                    return;
+                                txtItemId.setText(orderTable.getItemId());
+                                txtItemName.setText(orderTable.getItemName());
+                                txtItemPrice.setText(orderTable.getPrice());
+                                txtItemQuantity.setText(orderTable.getQuantity());
+                                txtTotal.setText(orderTable.getTotal());
+                                editItemIndex = row.getIndex();
+                                isOnEdit=true;
+                                txtItemName.requestFocus();
+                            }
+                        });
+
+                        MenuItem delete = new MenuItem("Delete");
+                        delete.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                tblViewOrder.getItems().remove(row.getItem());
+                            }
+                        });
+                        contextMenu.getItems().addAll(edit,delete);
+
+                        row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu) null).otherwise(contextMenu));
+                        return row;
+                    }
+                }
+        );
     }
 
     public String getItemPrice(String itemId){

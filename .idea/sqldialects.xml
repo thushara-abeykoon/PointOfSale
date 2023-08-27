@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/138a46e0-d8c2-4946-9128-0485569dfe96/console.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/pos/pointofsale/controller/registerformcontroller/RegisterFormController.java" dialect="GenericSQL" />
   </component>
 </project>

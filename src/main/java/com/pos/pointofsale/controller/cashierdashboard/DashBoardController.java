@@ -52,12 +52,18 @@ public class DashBoardController {
 
     public void setLblAverageDailyRevenue(){
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT SUM(total_price), COUNT(total_price) FROM orders where emp_id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT SUM(total_price) FROM orders where emp_id = ?");
             preparedStatement.setObject(1,empId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()&& resultSet.getString(1)!=null) {
+
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(order_date) OVER() FROM orders WHERE emp_id = ? GROUP BY order_date asc");
+            preparedStatement1.setObject(1,empId);
+            ResultSet resultSet1 = preparedStatement1.executeQuery();
+
+
+            if(resultSet.next()&& resultSet.getString(1)!=null&& resultSet1.next()) {
                 double sum = resultSet.getDouble(1);
-                double count = resultSet.getDouble(2);
+                double count = resultSet1.getDouble(1);
                 lblAverageDailyRevenue.setText(Double.toString(sum/count)+" LKR");
             }
             else
@@ -70,9 +76,10 @@ public class DashBoardController {
     }
     public void setLblMonthlyRevenueAndTotalOrders(){
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT SUM(total_price),COUNT(total_price) FROM orders WHERE DATE_FORMAT(order_date,'%Y-%m')=DATE_FORMAT(curdate(),'%Y-%m')");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT SUM(total_price),COUNT(total_price) FROM orders WHERE DATE_FORMAT(order_date,'%Y-%m')=DATE_FORMAT(curdate(),'%Y-%m') AND emp_id = ?");
+            preparedStatement.setObject(1,empId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()||resultSet.getString(1)==null){
+            if (!resultSet.next()||resultSet.getString(1)==null){
                 lblMonthlyRevenue.setText("0.0 LKR");
                 lblMonthlyTotalOrders.setText("0");
             }

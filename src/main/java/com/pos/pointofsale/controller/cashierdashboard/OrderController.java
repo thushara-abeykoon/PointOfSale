@@ -2,8 +2,11 @@ package com.pos.pointofsale.controller.cashierdashboard;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import com.pos.pointofsale.controller.ControllerCommon;
+import com.pos.pointofsale.controller.LoginFormController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.OrderTable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -33,6 +36,8 @@ public class OrderController {
     public static final Connection connection = DatabaseConnector.getInstance().getConnection();
     ArrayList<String> itemsList = new ArrayList<>();
     public double total = 0.00;
+    public boolean isOnEdit = false;
+    public int editItemIndex = -1;
 
     public void initialize(){
         loadColumnData();
@@ -53,8 +58,28 @@ public class OrderController {
         txtItemQuantityFilter();
         txtItemQuantityOnKeyPressed();
         lblOrderId.setText(orderIdGenerator());
+        onSelectTableRow();
     }
 
+    public void onSelectTableRow(){
+        tblViewOrder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                OrderTable orderTable = tblViewOrder.getSelectionModel().getSelectedItem();
+                if (orderTable==null)
+                    return;
+                txtItemId.setText(orderTable.getItemId());
+                txtItemName.setText(orderTable.getItemName());
+                txtItemPrice.setText(orderTable.getPrice());
+                txtItemQuantity.setText(orderTable.getQuantity());
+                txtTotal.setText(orderTable.getTotal());
+                editItemIndex = (int) t1;
+                isOnEdit=true;
+                txtItemName.requestFocus();
+            }
+        });
+
+    }
 
     public String getItemPrice(String itemId){
         try {
@@ -107,18 +132,31 @@ public class OrderController {
     public void txtItemQuantityOnAction(ActionEvent event) {
         if (txtItemQuantity.getText().isEmpty())
             txtItemQuantity.requestFocus();
+        else if(isOnEdit){
+            tblViewOrder.getSelectionModel().clearSelection();
+            ObservableList<OrderTable> orderItems = tblViewOrder.getItems();
+            orderItems.set(editItemIndex,new OrderTable(txtItemId.getText(),txtItemName.getText(),txtItemPrice.getText(),txtItemQuantity.getText(),txtTotal.getText()));
+            tblViewOrder.refresh();
+            isOnEdit = false;
+            onTableValueEntered();
+        }
         else{
             loadTableData();
             total += Double.parseDouble(txtTotal.getText());
             lblTotalPrice.setText("TOTAL = "+getCorrectTotalPriceFormat(total)+" LKR");
-            txtItemId.clear();
-            txtItemName.clear();
-            txtItemPrice.clear();
-            txtItemQuantity.clear();
-            txtTotal.clear();
-            txtItemName.requestFocus();
+            onTableValueEntered();
         }
     }
+
+    public void onTableValueEntered(){
+        txtItemId.clear();
+        txtItemName.clear();
+        txtItemPrice.clear();
+        txtItemQuantity.clear();
+        txtTotal.clear();
+        txtItemName.requestFocus();
+    }
+
     public void txtItemQuantityOnKeyPressed(){
         txtItemQuantity.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -161,6 +199,27 @@ public class OrderController {
     }
 
     public void btnCheckoutOnAction(ActionEvent event) {
+
+        ObservableList<OrderTable> orderItems = tblViewOrder.getItems();
+
+        if(orderItems.isEmpty())
+            return;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO orders(order_id, emp_id, total_price, order_time, order_date) VALUES (?,?,?,curtime(),curdate())");
+            preparedStatement.setObject(1,orderIdGenerator());
+            preparedStatement.setObject(2, CashierDashboardController.empId);
+            preparedStatement.setObject(3,total);
+            int status = preparedStatement.executeUpdate();
+            if (status>0){;
+                orderItems.clear();
+                lblTotalPrice.setText("TOTAL = 0.00 LKR");
+                tblViewOrder.refresh();
+                lblOrderId.setText(orderIdGenerator());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //In this method It's avoid appearing other than 0-9 and . characters in the Quantity text field
@@ -189,11 +248,8 @@ public class OrderController {
     }
 
     public String orderIdGenerator(){
-        StringBuilder initialLetter = new StringBuilder();
-        initialLetter.append("0".repeat(16));
-        initialLetter.append(1);
-        System.out.println(initialLetter);
-        return ControllerCommon.getID("orders", "order_id", "ODR", initialLetter.toString());
+        String initialLetter = "0".repeat(16) + 1;
+        return ControllerCommon.getID("orders", "order_id", "ODR", initialLetter);
     }
 
 }

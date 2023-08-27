@@ -1,10 +1,17 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
+import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.OrderHistoryTable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,9 +22,11 @@ public class HistoryController {
     public TableView<OrderHistoryTable> tblOrderHistory;
     public String empId = CashierDashboardController.empId;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
+    private int selectedItemIndex = -1;
     public void initialize(){
         tableColumnInitializer();
         loadListData();
+        onRowClicked();
     }
     public void loadListData(){
         ObservableList<OrderHistoryTable> items = tblOrderHistory.getItems();
@@ -44,4 +53,29 @@ public class HistoryController {
         tblOrderHistory.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("orderDate"));
         tblOrderHistory.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("orderTime"));
     }
+
+    public void onRowClicked(){
+       tblOrderHistory.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+           @Override
+           public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+               OrderHistoryTable selectedItem = tblOrderHistory.getSelectionModel().getSelectedItem();
+               if (selectedItem==null) {
+                   return;
+               }
+
+               selectedItemIndex = (int) t1;
+
+               AnchorPane anchorPane = new AnchorPane();
+               anchorPane.setPrefWidth(100);
+               anchorPane.setPrefHeight(100);
+               StackPane stackPane = new StackPane(anchorPane);
+               stackPane.setPrefWidth(100);
+               stackPane.setPrefHeight(100);
+               Stage stage = new Stage();
+               stage.setScene( new Scene(stackPane));
+               stage.show();
+           }
+       });
+    }
+
 }

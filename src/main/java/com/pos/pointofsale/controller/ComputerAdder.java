@@ -37,7 +37,7 @@ public class ComputerAdder {
 
         Connection connection = DatabaseConnector.getInstance().getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO computer(cmp_id,mac_address,description) VALUES (?,?,?);");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO computer (cmp_id,mac_address,description) VALUES (?,?,?);");
             preparedStatement.setObject(1,txtComputerId.getText());
             preparedStatement.setObject(2,txtMacAddress.getText());
             preparedStatement.setObject(3,txtDescription.getText());

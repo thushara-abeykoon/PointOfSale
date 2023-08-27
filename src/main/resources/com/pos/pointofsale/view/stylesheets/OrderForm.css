@@ -10,10 +10,11 @@
 .column-header{
     -fx-background-color: transparent;
     -fx-text-fill: white;
+    -fx-font-size: 15px;
 }
 
-.table-row .table-cell{
 
+.table-row .table-cell{
 }
 
 .table-row-cell:selected{

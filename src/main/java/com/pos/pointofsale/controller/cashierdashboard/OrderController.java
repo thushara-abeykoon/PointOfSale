@@ -1,19 +1,12 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import com.pos.pointofsale.controller.ControllerCommon;
-import com.pos.pointofsale.controller.LoginFormController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.OrderTable;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
@@ -237,7 +230,7 @@ public class OrderController {
             preparedStatement.setObject(2, CashierDashboardController.empId);
             preparedStatement.setObject(3,total);
             int status = preparedStatement.executeUpdate();
-            if (status>0){;
+            if (status>0){
                 orderItems.clear();
                 lblTotalPrice.setText("TOTAL = 0.00 LKR");
                 tblViewOrder.refresh();
@@ -246,6 +239,7 @@ public class OrderController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        insertIntoOrderItemTable();
     }
 
     //In this method It's avoid appearing other than 0-9 and . characters in the Quantity text field
@@ -276,6 +270,24 @@ public class OrderController {
     public String orderIdGenerator(){
         String initialLetter = "0".repeat(16) + 1;
         return ControllerCommon.getID("orders", "order_id", "ODR", initialLetter);
+    }
+
+    public void insertIntoOrderItemTable() {
+        try {
+            ObservableList<OrderTable> orderItems = tblViewOrder.getItems();
+            for (int i = 0;i<orderItems.toArray().length; i++) {
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO order_item(order_id, itm_id, quantity) VALUES (?,?,?)");
+                preparedStatement.setObject(1,orderIdGenerator());
+                preparedStatement.setObject(2,orderItems.get(i).getItemId());
+                preparedStatement.setObject(3,Integer.parseInt(orderItems.get(i).getQuantity()));
+                preparedStatement.executeUpdate();
+
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
 }

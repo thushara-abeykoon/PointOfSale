@@ -1,6 +1,7 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud;
+import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.OrderTable;
 import javafx.collections.ObservableArray;
@@ -31,6 +32,7 @@ public class OrderController {
     public Label lblTotalPrice;
     public static final Connection connection = DatabaseConnector.getInstance().getConnection();
     ArrayList<String> itemsList = new ArrayList<>();
+    public double total = 0.00;
 
     public void initialize(){
         loadColumnData();
@@ -50,6 +52,7 @@ public class OrderController {
         });
         txtItemQuantityFilter();
         txtItemQuantityOnKeyPressed();
+        lblOrderId.setText(orderIdGenerator());
     }
 
 
@@ -61,7 +64,7 @@ public class OrderController {
             if (resultSet.next())
                 return resultSet.getString(1);
             else
-                return "0.0";
+                return "0.00";
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -106,6 +109,8 @@ public class OrderController {
             txtItemQuantity.requestFocus();
         else{
             loadTableData();
+            total += Double.parseDouble(txtTotal.getText());
+            lblTotalPrice.setText("TOTAL = "+getCorrectTotalPriceFormat(total)+" LKR");
             txtItemId.clear();
             txtItemName.clear();
             txtItemPrice.clear();
@@ -132,9 +137,9 @@ public class OrderController {
 
     public void getTotal(){
         if (txtItemPrice.getText().isEmpty())
-            txtTotal.setText("0.0");
+            txtTotal.setText("0.00");
         else if (txtItemQuantity.getText().isEmpty())
-            txtTotal.setText("0.0");
+            txtTotal.setText("0.00");
         else{
             double price = Double.parseDouble(txtItemPrice.getText());
             double quantity = Double.parseDouble(txtItemQuantity.getText());
@@ -181,6 +186,14 @@ public class OrderController {
         tblViewOrder.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("price"));
         tblViewOrder.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("quantity"));
         tblViewOrder.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("total"));
+    }
+
+    public String orderIdGenerator(){
+        StringBuilder initialLetter = new StringBuilder();
+        initialLetter.append("0".repeat(16));
+        initialLetter.append(1);
+        System.out.println(initialLetter);
+        return ControllerCommon.getID("orders", "order_id", "ODR", initialLetter.toString());
     }
 
 }

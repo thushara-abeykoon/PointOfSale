@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.OrderController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.OrderController">
    <top>
       <Pane prefHeight="109.0" prefWidth="600.0" stylesheets="@stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
          <children>
@@ -95,7 +84,7 @@
                   <TextField fx:id="txtTotal" disable="true" opacity="0.75" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <TableView fx:id="tblViewOrder" centerShape="false" editable="true" prefHeight="117.0" prefWidth="528.0" style="-fx-background-color: #b5b5b5;" stylesheets="@stylesheets/OrderForm.css" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tblViewOrder" centerShape="false" editable="true" prefHeight="117.0" prefWidth="528.0" style="-fx-background-color: white;" stylesheets="@stylesheets/OrderForm.css" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn id="tblItemId" editable="false" prefWidth="72.0" text="Item ID" />
                   <TableColumn id="tblItemName" editable="false" prefWidth="161.0" sortable="false" text="Item Name" />
@@ -124,7 +113,7 @@
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <center>
-                  <Label fx:id="lblTotalPrice" text="TOTAL = 1000 LKR" textFill="#a8a8a8" BorderPane.alignment="CENTER">
+                  <Label fx:id="lblTotalPrice" text="TOTAL = 0.00 LKR" textFill="#a8a8a8" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>

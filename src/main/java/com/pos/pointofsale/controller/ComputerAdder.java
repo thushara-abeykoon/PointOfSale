@@ -30,7 +30,7 @@ public class ComputerAdder {
     public void initialize(){
         ControllerCommon controllerCommon = new ControllerCommon();
         controllerCommon.dragPane(draggablePane,computerAdder);
-        txtComputerId.setText(ControllerCommon.getID("computer","cmp_id","CMP"));
+        txtComputerId.setText(ControllerCommon.getID("computer","cmp_id","CMP","0001"));
         txtMacAddress.setText(ControllerCommon.getMacAddress());
     }
     public void btnOkOnAction(ActionEvent event) {

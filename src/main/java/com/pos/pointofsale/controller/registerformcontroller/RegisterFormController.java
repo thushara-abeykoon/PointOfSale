@@ -32,7 +32,7 @@ public class RegisterFormController {
     public void initialize(){
         ControllerCommon controllerCommon = new ControllerCommon();
         controllerCommon.dragPane(draggablePane,root);
-        txtEmpID.setText(ControllerCommon.getID("employee","emp_id","EMP"));
+        txtEmpID.setText(ControllerCommon.getID("employee","emp_id","EMP","0001"));
         txtPhoneNoEventFilter();
     }
 

@@ -47,7 +47,7 @@ public class ControllerCommon {
         icn.setFill(Paint.valueOf("#ff2700"));
     }
 
-    public static String getID(String tableName, String columnName,String firstLetters){
+    public static String getID(String tableName, String columnName,String firstLetters, String initialLetters){
         if (firstLetters.length()!=3)
             throw new RuntimeException("Wrong letter input!");
 
@@ -65,7 +65,7 @@ public class ControllerCommon {
                     return empId.substring(0,empId.length()-empIdInt.length()).concat(empIdInt);
             }
             else
-                return firstLetters+"0001";
+                return firstLetters+initialLetters;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

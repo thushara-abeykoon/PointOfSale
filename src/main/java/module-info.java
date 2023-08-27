@@ -6,8 +6,10 @@ module com.pos.pointofsale {
     requires mysql.connector.j;
     requires org.controlsfx.controls;
 
-
+    opens com.pos.pointofsale.model to javafx.fxml;
     opens com.pos.pointofsale to javafx.fxml;
+
+    exports com.pos.pointofsale.model;
     exports com.pos.pointofsale;
     exports com.pos.pointofsale.controller;
     opens com.pos.pointofsale.controller to javafx.fxml;

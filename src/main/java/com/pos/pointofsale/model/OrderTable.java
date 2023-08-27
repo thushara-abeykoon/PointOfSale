@@ -7,6 +7,17 @@ public class OrderTable {
     private String quantity;
     private String total;
 
+    public OrderTable(String itemId, String itemName, String price, String quantity, String total) {
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.price = price;
+        this.quantity = quantity;
+        this.total = total;
+    }
+
+    public OrderTable() {
+    }
+
     public String getItemId() {
         return itemId;
     }

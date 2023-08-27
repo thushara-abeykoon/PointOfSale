@@ -1,13 +1,16 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.OrderTable;
 import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -30,6 +33,7 @@ public class OrderController {
     ArrayList<String> itemsList = new ArrayList<>();
 
     public void initialize(){
+        loadColumnData();
         txtTotal.setText("0.0");
         setItemsList();
         AutoCompletionBinding<Object> objectAutoCompletionBinding = TextFields.bindAutoCompletion(txtItemName, itemsList.toArray());
@@ -100,6 +104,15 @@ public class OrderController {
     public void txtItemQuantityOnAction(ActionEvent event) {
         if (txtItemQuantity.getText().isEmpty())
             txtItemQuantity.requestFocus();
+        else{
+            loadTableData();
+            txtItemId.clear();
+            txtItemName.clear();
+            txtItemPrice.clear();
+            txtItemQuantity.clear();
+            txtTotal.clear();
+            txtItemName.requestFocus();
+        }
     }
     public void txtItemQuantityOnKeyPressed(){
         txtItemQuantity.setOnKeyTyped(new EventHandler<KeyEvent>() {
@@ -145,6 +158,7 @@ public class OrderController {
     public void btnCheckoutOnAction(ActionEvent event) {
     }
 
+    //In this method It's avoid appearing other than 0-9 and . characters in the Quantity text field
     public void txtItemQuantityFilter(){
         txtItemQuantity.addEventFilter(KeyEvent.KEY_TYPED, event->{
             String character = event.getCharacter();
@@ -154,4 +168,19 @@ public class OrderController {
                 event.consume();
         });
     }
+
+    public void loadTableData() {
+        ObservableList<OrderTable> orderItems = tblViewOrder.getItems();
+        orderItems.add(new OrderTable(txtItemId.getText(), txtItemName.getText(), txtItemPrice.getText(), txtItemQuantity.getText(), txtTotal.getText()));
+        tblViewOrder.refresh();
+    }
+
+    public void loadColumnData(){
+        tblViewOrder.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        tblViewOrder.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        tblViewOrder.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("price"));
+        tblViewOrder.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        tblViewOrder.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("total"));
+    }
+
 }

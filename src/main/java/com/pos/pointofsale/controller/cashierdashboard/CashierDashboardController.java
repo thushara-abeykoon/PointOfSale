@@ -45,6 +45,7 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
     public BorderPane root;
     private final boolean[] tabsLoaded = new boolean[6];
     public String logId = LoginFormController.logId;
+    public String empId = LoginFormController.empId;
 
     public void initialize(){
         setPaneActive(0);

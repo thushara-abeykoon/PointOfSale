@@ -4,6 +4,7 @@ module com.pos.pointofsale {
     requires de.jensd.fx.glyphs.materialicons;
     requires java.sql;
     requires mysql.connector.j;
+    requires org.controlsfx.controls;
 
 
     opens com.pos.pointofsale to javafx.fxml;

@@ -24,6 +24,7 @@ public class DashBoardController {
         setLblAverageDailyRevenue();
         setLblMonthlyRevenueAndTotalOrders();
         setLblMonthlyWorkHours();
+
     }
 
     public void setLblTodayRevenue(){

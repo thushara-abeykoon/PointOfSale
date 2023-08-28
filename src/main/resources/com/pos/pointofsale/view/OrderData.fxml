@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.OrderDataController">
+   <top>
+      <Pane prefHeight="103.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblOrderItemId" layoutX="41.0" layoutY="34.0" text="ODR00000000000000000" textFill="#979696">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblOrderHistoryItemTotal" layoutX="374.0" layoutY="34.0" text="0.00 LKR" textFill="#979696">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <TableView fx:id="tblOrderHistoryItem" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Item ID" />
+          <TableColumn prefWidth="75.0" text="Item Name" />
+            <TableColumn prefWidth="75.0" text="Item Price" />
+            <TableColumn prefWidth="75.0" text="Quantitiy" />
+            <TableColumn prefWidth="75.0" text="Total" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </center>
+</BorderPane>

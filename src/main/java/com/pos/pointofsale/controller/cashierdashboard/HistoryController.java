@@ -7,12 +7,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +25,8 @@ public class HistoryController {
     public TableView<OrderHistoryTable> tblOrderHistory;
     public String empId = CashierDashboardController.empId;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
-    private int selectedItemIndex = -1;
+    public static String currentOrderId;
+    public static String currentOrderTotal;
     public void initialize(){
         tableColumnInitializer();
         loadListData();
@@ -55,26 +59,24 @@ public class HistoryController {
     }
 
     public void onRowClicked(){
-       tblOrderHistory.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-           @Override
-           public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-               OrderHistoryTable selectedItem = tblOrderHistory.getSelectionModel().getSelectedItem();
-               if (selectedItem==null) {
-                   return;
+       tblOrderHistory.setRowFactory(tv->{
+           TableRow<OrderHistoryTable> row = new TableRow<>();
+           row.setOnMouseClicked(mouseEvent -> {
+               if (!row.isEmpty() && mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
+                   currentOrderId = row.getItem().getOrderId();
+                   currentOrderTotal = row.getItem().getTotalPrice();
+                   StageController stageController = new StageController();
+                   try {
+                       Stage stage = stageController.loadStage("view/OrderData.fxml", "Order Details");
+                       stage.setResizable(false);
+                       stage.show();
+
+                   } catch (IOException e) {
+                       throw new RuntimeException(e);
+                   }
                }
-
-               selectedItemIndex = (int) t1;
-
-               AnchorPane anchorPane = new AnchorPane();
-               anchorPane.setPrefWidth(100);
-               anchorPane.setPrefHeight(100);
-               StackPane stackPane = new StackPane(anchorPane);
-               stackPane.setPrefWidth(100);
-               stackPane.setPrefHeight(100);
-               Stage stage = new Stage();
-               stage.setScene( new Scene(stackPane));
-               stage.show();
-           }
+           });
+           return row;
        });
     }
 

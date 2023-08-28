@@ -71,6 +71,7 @@ public class ItemsController {
                         throw new SQLException();
                     else {
                         loadTableItems();
+                        txtItemId.setText(getItemId());
                     }
                 } catch (SQLException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR,"Item cannot be deleted due to order history fail...");

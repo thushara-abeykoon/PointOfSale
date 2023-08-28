@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.CashierDashboardController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.CashierDashboardController">
    <left>
       <VBox fx:id="vboxLeft" prefHeight="563.0" prefWidth="62.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <Pane layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="64.0">
@@ -36,7 +33,7 @@
             </ImageView>
             <Label fx:id="lblDashboard" layoutX="54.0" layoutY="18.0" text="DASHBOARD" textFill="WHITE" visible="false">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -58,7 +55,7 @@
             </ImageView>
             <Label fx:id="lblOrder" layoutX="55.0" layoutY="16.0" text="ORDER" textFill="WHITE" visible="false">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -80,7 +77,7 @@
             </ImageView>
             <Label fx:id="lblHistory" layoutX="55.0" layoutY="17.0" text="HISTORY" textFill="WHITE" visible="false">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -102,7 +99,7 @@
             </ImageView>
             <Label fx:id="lblItems" layoutX="56.0" layoutY="17.0" text="ITEMS" textFill="WHITE" visible="false">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -124,7 +121,7 @@
             </ImageView>
             <Label fx:id="lblEmployeeDetails" layoutX="52.0" layoutY="17.0" text="EMPOYEE DETAILS" textFill="WHITE" visible="false">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

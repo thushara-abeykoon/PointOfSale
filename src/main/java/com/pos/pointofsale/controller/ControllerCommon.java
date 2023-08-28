@@ -3,6 +3,8 @@ package com.pos.pointofsale.controller;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
@@ -88,6 +90,15 @@ public class ControllerCommon {
             e.printStackTrace();
         }
         return "";
+    }
+    public static void textFieldFilter(TextField textField){
+        textField.addEventFilter(KeyEvent.KEY_TYPED, event->{
+            String character = event.getCharacter();
+
+            String allowedCharacters = "0123456789.";
+            if (!allowedCharacters.contains(character))
+                event.consume();
+        });
     }
 
 }

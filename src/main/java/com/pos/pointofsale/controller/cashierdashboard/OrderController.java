@@ -50,7 +50,7 @@ public class OrderController {
             txtItemPrice.setText(getItemPrice(itemId));
             txtItemQuantity.requestFocus();
         });
-        txtItemQuantityFilter();
+        ControllerCommon.textFieldFilter(txtItemQuantity);
         txtItemQuantityOnKeyPressed();
         lblOrderId.setText(orderIdGenerator());
        // onSelectTableRow();
@@ -224,17 +224,6 @@ public class OrderController {
             throw new RuntimeException(e);
         }
 
-    }
-
-    //In this method It's avoid appearing other than 0-9 and . characters in the Quantity text field
-    public void txtItemQuantityFilter(){
-        txtItemQuantity.addEventFilter(KeyEvent.KEY_TYPED, event->{
-            String character = event.getCharacter();
-
-            String allowedCharacters = "0123456789.";
-            if (!allowedCharacters.contains(character))
-                event.consume();
-        });
     }
 
     public void loadTableData() {

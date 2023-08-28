@@ -220,17 +220,19 @@ public class OrderController {
     public void btnCheckoutOnAction(ActionEvent event) {
 
         ObservableList<OrderTable> orderItems = tblViewOrder.getItems();
+        String currentOrderID = orderIdGenerator();
 
         if(orderItems.isEmpty())
             return;
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO orders(order_id, emp_id, total_price, order_time, order_date) VALUES (?,?,?,curtime(),curdate())");
-            preparedStatement.setObject(1,orderIdGenerator());
+            preparedStatement.setObject(1,currentOrderID);
             preparedStatement.setObject(2, CashierDashboardController.empId);
             preparedStatement.setObject(3,total);
             int status = preparedStatement.executeUpdate();
             if (status>0){
+                insertIntoOrderItemTable(currentOrderID);
                 orderItems.clear();
                 lblTotalPrice.setText("TOTAL = 0.00 LKR");
                 tblViewOrder.refresh();
@@ -239,7 +241,7 @@ public class OrderController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        insertIntoOrderItemTable();
+
     }
 
     //In this method It's avoid appearing other than 0-9 and . characters in the Quantity text field
@@ -272,16 +274,15 @@ public class OrderController {
         return ControllerCommon.getID("orders", "order_id", "ODR", initialLetter);
     }
 
-    public void insertIntoOrderItemTable() {
+    public void insertIntoOrderItemTable(String orderId) {
         try {
             ObservableList<OrderTable> orderItems = tblViewOrder.getItems();
             for (int i = 0;i<orderItems.toArray().length; i++) {
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO order_item(order_id, itm_id, quantity) VALUES (?,?,?)");
-                preparedStatement.setObject(1,orderIdGenerator());
+                preparedStatement.setObject(1,orderId);
                 preparedStatement.setObject(2,orderItems.get(i).getItemId());
                 preparedStatement.setObject(3,Integer.parseInt(orderItems.get(i).getQuantity()));
                 preparedStatement.executeUpdate();
-
             }
         }
         catch (SQLException e){

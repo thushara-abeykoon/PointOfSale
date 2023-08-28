@@ -99,6 +99,8 @@ public class LoginFormController {
                     StageController stageController = new StageController();
                     scene = stageController.loadScene("view/CashierDashboard.fxml");
                     Stage stage = new Stage();
+                    stage.getIcons().add(StageController.getIcon());
+                    stage.setTitle("Cashier Dashboard");
                     stage.setScene(scene);
                     stage.centerOnScreen();
                     stage.setMaximized(true);

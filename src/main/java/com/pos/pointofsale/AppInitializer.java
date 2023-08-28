@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -19,6 +20,7 @@ public class AppInitializer extends Application {
         stage.setScene(scene);
         stage.setTitle("Login");
         stage.setResizable(false);
+        stage.getIcons().add(new Image(this.getClass().getResource("images/icn.png").openStream()));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }

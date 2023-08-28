@@ -29,7 +29,6 @@ public class LoginFormController {
     public Pane draggablePane;
     public Label lblAddThisComputer;
     private static final Connection connection = DatabaseConnector.getInstance().getConnection();
-    public static String empId = "emp0001";
     public static String cmpId;
     public static String logId;
     public static Scene scene;

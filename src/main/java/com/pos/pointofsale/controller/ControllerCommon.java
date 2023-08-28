@@ -6,15 +6,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.sql.*;
-import java.util.regex.Matcher;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ControllerCommon {
     public static Connection connection = DatabaseConnector.getInstance().getConnection();

@@ -5,19 +5,20 @@ import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.OrderTable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class OrderController {
     public Label lblOrderId;
@@ -41,16 +42,13 @@ public class OrderController {
         txtTotal.setText("0.0");
         setItemsList();
         AutoCompletionBinding<Object> objectAutoCompletionBinding = TextFields.bindAutoCompletion(txtItemName, itemsList.toArray());
-        objectAutoCompletionBinding.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<Object>>() {
-            @Override
-            public void handle(AutoCompletionBinding.AutoCompletionEvent<Object> objectAutoCompletionEvent) {
-                String itemId = txtItemName.getText().substring(0,8);
-                String itemName = txtItemName.getText().substring(10);
-                txtItemName.setText(itemName);
-                txtItemId.setText(itemId);
-                txtItemPrice.setText(getItemPrice(itemId));
-                txtItemQuantity.requestFocus();
-            }
+        objectAutoCompletionBinding.setOnAutoCompleted(objectAutoCompletionEvent -> {
+            String itemId = txtItemName.getText().substring(0, 8);
+            String itemName = txtItemName.getText().substring(10);
+            txtItemName.setText(itemName);
+            txtItemId.setText(itemId);
+            txtItemPrice.setText(getItemPrice(itemId));
+            txtItemQuantity.requestFocus();
         });
         txtItemQuantityFilter();
         txtItemQuantityOnKeyPressed();
@@ -62,42 +60,31 @@ public class OrderController {
 
     public void onContextMenuRequestedOnTableRow(){
         tblViewOrder.setRowFactory(
-                new Callback<TableView<OrderTable>, TableRow<OrderTable>>() {
-                    @Override
-                    public TableRow<OrderTable> call(TableView<OrderTable> orderTableTableView) {
-                        final TableRow<OrderTable> row = new TableRow<>();
-                        ContextMenu contextMenu = new ContextMenu();
+                orderTableTableView -> {
+                    final TableRow<OrderTable> row = new TableRow<>();
+                    ContextMenu contextMenu = new ContextMenu();
 
-                        MenuItem edit = new MenuItem("Edit");
-                        edit.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                OrderTable orderTable = tblViewOrder.getSelectionModel().getSelectedItem();
-                                if (orderTable==null)
-                                    return;
-                                txtItemId.setText(orderTable.getItemId());
-                                txtItemName.setText(orderTable.getItemName());
-                                txtItemPrice.setText(orderTable.getPrice());
-                                txtItemQuantity.setText(orderTable.getQuantity());
-                                txtTotal.setText(orderTable.getTotal());
-                                editItemIndex = row.getIndex();
-                                isOnEdit=true;
-                                txtItemName.requestFocus();
-                            }
-                        });
+                    MenuItem edit = new MenuItem("Edit");
+                    edit.setOnAction(event -> {
+                        OrderTable orderTable = tblViewOrder.getSelectionModel().getSelectedItem();
+                        if (orderTable==null)
+                            return;
+                        txtItemId.setText(orderTable.getItemId());
+                        txtItemName.setText(orderTable.getItemName());
+                        txtItemPrice.setText(orderTable.getPrice());
+                        txtItemQuantity.setText(orderTable.getQuantity());
+                        txtTotal.setText(orderTable.getTotal());
+                        editItemIndex = row.getIndex();
+                        isOnEdit=true;
+                        txtItemName.requestFocus();
+                    });
 
-                        MenuItem delete = new MenuItem("Delete");
-                        delete.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                tblViewOrder.getItems().remove(row.getItem());
-                            }
-                        });
-                        contextMenu.getItems().addAll(edit,delete);
+                    MenuItem delete = new MenuItem("Delete");
+                    delete.setOnAction(event -> tblViewOrder.getItems().remove(row.getItem()));
+                    contextMenu.getItems().addAll(edit,delete);
 
-                        row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu) null).otherwise(contextMenu));
-                        return row;
-                    }
+                    row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu) null).otherwise(contextMenu));
+                    return row;
                 }
         );
     }
@@ -128,7 +115,7 @@ public class OrderController {
         }
     }
 
-    public void txtItemNameOnAction(ActionEvent event) {
+    public void txtItemNameOnAction() {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT itm_id FROM item WHERE itm_name = ?");
             preparedStatement.setObject(1,txtItemName.getText());
@@ -137,6 +124,7 @@ public class OrderController {
                 txtItemId.setText(resultSet.getString(1));
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR,"Unable to find Item");
+                alert.showAndWait();
             }
 
 
@@ -146,11 +134,11 @@ public class OrderController {
 
     }
 
-    public void txtItemNameOnKeyTyped(KeyEvent keyEvent) {
+    public void txtItemNameOnKeyTyped() {
 
     }
 
-    public void txtItemQuantityOnAction(ActionEvent event) {
+    public void txtItemQuantityOnAction() {
         if (txtItemQuantity.getText().isEmpty())
             txtItemQuantity.requestFocus();
         else if(isOnEdit){
@@ -179,18 +167,10 @@ public class OrderController {
     }
 
     public void txtItemQuantityOnKeyPressed(){
-        txtItemQuantity.setOnKeyTyped(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
+        txtItemQuantity.setOnKeyTyped(keyEvent -> getTotal());
+        txtItemQuantity.setOnKeyReleased(keyEvent -> {
+            if(keyEvent.getCode()==KeyCode.BACK_SPACE||keyEvent.getCode()== KeyCode.DELETE)
                 getTotal();
-            }
-        });
-        txtItemQuantity.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(keyEvent.getCode()==KeyCode.BACK_SPACE||keyEvent.getCode()== KeyCode.DELETE)
-                    getTotal();
-            }
         });
     }
 
@@ -219,7 +199,7 @@ public class OrderController {
         }
     }
 
-    public void btnCheckoutOnAction(ActionEvent event) {
+    public void btnCheckoutOnAction() {
 
         ObservableList<OrderTable> orderItems = tblViewOrder.getItems();
         String currentOrderID = orderIdGenerator();

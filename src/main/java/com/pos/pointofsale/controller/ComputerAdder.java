@@ -3,7 +3,6 @@ package com.pos.pointofsale.controller;
 import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -33,7 +32,7 @@ public class ComputerAdder {
         txtComputerId.setText(ControllerCommon.getID("computer","cmp_id","CMP","0001"));
         txtMacAddress.setText(ControllerCommon.getMacAddress());
     }
-    public void btnOkOnAction(ActionEvent event) {
+    public void btnOkOnAction() {
 
         Connection connection = DatabaseConnector.getInstance().getConnection();
         try {
@@ -60,15 +59,15 @@ public class ComputerAdder {
 
     }
 
-    public void icnCloseOnMouseEntered(MouseEvent mouseEvent) {
+    public void icnCloseOnMouseEntered() {
         ControllerCommon.icnCloseOnMouseEntered(icnClose);
     }
 
-    public void icnCloseOnMouseExited(MouseEvent mouseEvent) {
+    public void icnCloseOnMouseExited() {
         ControllerCommon.icnCloseOnMouseExited(icnClose);
     }
 
-    public void icnCloseOnMouseClicked(MouseEvent mouseEvent) throws IOException {
+    public void icnCloseOnMouseClicked() throws IOException {
         StageController.closeStage(computerAdder);
         Stage stage = stageController.loadStage("view/LoginForm.fxml", "Login");
         stage.centerOnScreen();

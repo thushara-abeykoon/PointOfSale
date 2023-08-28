@@ -3,16 +3,11 @@ package com.pos.pointofsale.controller.cashierdashboard;
 import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.OrderHistoryTable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;

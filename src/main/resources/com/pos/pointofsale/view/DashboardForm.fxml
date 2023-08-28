@@ -14,17 +14,13 @@
 <BorderPane fx:id="rootDashboard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="470.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.DashBoardController">
    <top>
       <HBox prefHeight="100.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Pane prefHeight="100.0" prefWidth="361.0">
-               <children>
-                  <Label layoutX="36.0" layoutY="24.0" text="GREETINGS!" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </children>
+         <Pane prefHeight="100.0" prefWidth="361.0">
+            <Label layoutX="36.0" layoutY="24.0" text="GREETINGS!" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0"/>
+               </font>
+            </Label>
+         </Pane>
       </HBox>
    </top>
    <center>
@@ -42,9 +38,8 @@
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" />
          </BorderPane.margin>
-         <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
-               <children>
+
                   <Label layoutX="16.0" layoutY="10.0" text="Today's Revenue">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
@@ -55,13 +50,13 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-               </children>
+
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.columnIndex="1">
-               <children>
+
                   <Label layoutX="16.0" layoutY="10.0" text="Yesterday's Revenue">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
@@ -72,13 +67,13 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-               </children>
+
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.columnIndex="2">
-               <children>
+
                   <Label layoutX="16.0" layoutY="10.0" text="Average Daily Revenue">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
@@ -89,13 +84,13 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-               </children>
+
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.rowIndex="1">
-               <children>
+
                   <Label layoutX="16.0" layoutY="10.0" text="Monthly Work Hours">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
@@ -106,10 +101,10 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-               </children>
+
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
+
                   <Label layoutX="16.0" layoutY="10.0" text="Monthly Total Orders">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
@@ -120,10 +115,10 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-               </children>
+
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <children>
+
                   <Label layoutX="16.0" layoutY="10.0" text="Monthly Revenue">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
@@ -134,9 +129,9 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-               </children>
+
             </Pane>
-         </children>
+
       </GridPane>
    </center>
 </BorderPane>

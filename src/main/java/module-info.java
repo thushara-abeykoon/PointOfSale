@@ -8,7 +8,6 @@ module com.pos.pointofsale {
 
     opens com.pos.pointofsale.model to javafx.fxml;
     opens com.pos.pointofsale to javafx.fxml;
-
     exports com.pos.pointofsale.model;
     exports com.pos.pointofsale;
     exports com.pos.pointofsale.controller;

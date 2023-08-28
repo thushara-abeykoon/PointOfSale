@@ -23,11 +23,12 @@ import java.sql.SQLException;
 
 public class HistoryController {
     public TableView<OrderHistoryTable> tblOrderHistory;
-    public String empId = CashierDashboardController.empId;
+    public String empId;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
     public static String currentOrderId;
     public static String currentOrderTotal;
     public void initialize(){
+        empId = CashierDashboardController.empId;
         tableColumnInitializer();
         loadListData();
         onRowClicked();
@@ -47,10 +48,6 @@ public class HistoryController {
 
     }
 
-    private void onSelectRow(){
-
-    }
-
     private void tableColumnInitializer(){
         tblOrderHistory.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("orderId"));
         tblOrderHistory.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
@@ -62,7 +59,7 @@ public class HistoryController {
        tblOrderHistory.setRowFactory(tv->{
            TableRow<OrderHistoryTable> row = new TableRow<>();
            row.setOnMouseClicked(mouseEvent -> {
-               if (!row.isEmpty() && mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
+               if (!row.isEmpty() && mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 1) {
                    currentOrderId = row.getItem().getOrderId();
                    currentOrderTotal = row.getItem().getTotalPrice();
                    StageController stageController = new StageController();

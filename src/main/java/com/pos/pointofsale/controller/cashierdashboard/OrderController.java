@@ -33,8 +33,10 @@ public class OrderController {
     public double total = 0.00;
     public boolean isOnEdit = false;
     public int editItemIndex = -1;
+    private static String empId;
 
     public void initialize(){
+        empId = CashierDashboardController.empId;
         loadColumnData();
         txtTotal.setText("0.0");
         setItemsList();
@@ -228,7 +230,7 @@ public class OrderController {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO orders(order_id, emp_id, total_price, order_time, order_date) VALUES (?,?,?,curtime(),curdate())");
             preparedStatement.setObject(1,currentOrderID);
-            preparedStatement.setObject(2, CashierDashboardController.empId);
+            preparedStatement.setObject(2,empId);
             preparedStatement.setObject(3,total);
             int status = preparedStatement.executeUpdate();
             if (status>0){

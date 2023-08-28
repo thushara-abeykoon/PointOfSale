@@ -16,13 +16,13 @@ public class OrderDataController {
     public Label lblOrderItemId;
     public Label lblOrderHistoryItemTotal;
     public TableView<OrderDataTable> tblOrderHistoryItem;
-    private String orderId = HistoryController.currentOrderId;
-    private String orderTotal = HistoryController.currentOrderTotal;
+    private final String orderId = HistoryController.currentOrderId;
+    private final String orderTotal = HistoryController.currentOrderTotal;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
 
     public void initialize(){
         lblOrderItemId.setText(orderId);
-        lblOrderHistoryItemTotal.setText(orderTotal);
+        lblOrderHistoryItemTotal.setText(orderTotal + " LKR");
         tableColumnInitializer();
         loadTableData();
     }

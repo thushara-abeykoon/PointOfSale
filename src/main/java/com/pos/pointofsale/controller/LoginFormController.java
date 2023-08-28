@@ -1,6 +1,7 @@
 package com.pos.pointofsale.controller;
 
 import com.pos.pointofsale.StageController;
+import com.pos.pointofsale.controller.cashierdashboard.CashierDashboardController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.scene.Scene;
@@ -28,7 +29,7 @@ public class LoginFormController {
     public Pane draggablePane;
     public Label lblAddThisComputer;
     private static final Connection connection = DatabaseConnector.getInstance().getConnection();
-    public static String empId;
+    public static String empId = "emp0001";
     public static String cmpId;
     public static String logId;
     public static Scene scene;
@@ -95,7 +96,7 @@ public class LoginFormController {
                 getLogId();
                 if (status>0){
                     cmpId = txtComputerID.getText();
-                    empId = txtEmployeeID.getText();
+                    CashierDashboardController.empId = txtEmployeeID.getText();
                     StageController stageController = new StageController();
                     scene = stageController.loadScene("view/CashierDashboard.fxml");
                     Stage stage = new Stage();

@@ -1,8 +1,10 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
+import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.controller.LoginFormController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 
 import java.sql.*;
 
@@ -16,9 +18,11 @@ public class DashBoardController {
     public Label lblMonthlyRevenue;
 
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
-    public static String empId = LoginFormController.empId;
+    public static String empId;
+    public static BorderPane rootDashboard;
 
     public void initialize(){
+        empId = CashierDashboardController.empId;
         setLblTodayRevenue();
         setLblYesterdayRevenue();
         setLblAverageDailyRevenue();

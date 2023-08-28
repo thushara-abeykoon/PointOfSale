@@ -45,9 +45,10 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
     public BorderPane root;
     private final boolean[] tabsLoaded = new boolean[6];
     public String logId = LoginFormController.logId;
-    public static String empId = LoginFormController.empId;
+    public static String empId;
 
     public void initialize(){
+        System.out.println(empId);
         setPaneActive(0);
         DashboardStyleConfiguration.setPaneBackground(paneDashboard,"#282929");
         paneLoader("view/DashboardForm.fxml");
@@ -144,13 +145,13 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
             preparedStatement.setObject(1,Integer.parseInt(logId));
             int status = preparedStatement.executeUpdate();
             if (status>0){
-                System.out.println(root);
                 StageController.closeStage(root);
                 StageController stageController = new StageController();
                 Stage stage = stageController.loadStage("view/LoginForm.fxml", "Login");
                 stage.initStyle(StageStyle.UNDECORATED);
                 stage.centerOnScreen();
                 stage.show();
+                empId = null;
             }
 
         } catch (SQLException | IOException e) {

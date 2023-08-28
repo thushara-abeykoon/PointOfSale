@@ -11,12 +11,12 @@
    <top>
       <Pane prefHeight="103.0" prefWidth="600.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblOrderItemId" layoutX="41.0" layoutY="34.0" text="ODR00000000000000000" textFill="#979696">
+            <Label fx:id="lblOrderItemId" layoutX="14.0" layoutY="34.0" text="ODR00000000000000000" textFill="#979696">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblOrderHistoryItemTotal" layoutX="374.0" layoutY="34.0" text="0.00 LKR" textFill="#979696">
+            <Label fx:id="lblOrderHistoryItemTotal" layoutX="358.0" layoutY="34.0" text="0.00 LKR" textFill="#979696">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -25,7 +25,7 @@
       </Pane>
    </top>
    <center>
-      <TableView fx:id="tblOrderHistoryItem" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="tblOrderHistoryItem" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn prefWidth="75.0" text="Item ID" />
           <TableColumn prefWidth="75.0" text="Item Name" />

@@ -8,7 +8,7 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.OrderController">
    <top>
-      <Pane prefHeight="109.0" prefWidth="600.0" stylesheets="@stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
+      <Pane prefHeight="109.0" prefWidth="600.0" stylesheets="@../stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
          <Label layoutX="36.0" layoutY="24.0" text="NEW ORDER!" textFill="WHITE">
             <font>
                <Font name="System Bold" size="36.0"/>
@@ -87,7 +87,7 @@
                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
          </GridPane>
          <TableView fx:id="tblViewOrder" centerShape="false" editable="true" prefHeight="117.0" prefWidth="528.0"
-                    style="-fx-background-color: white;" stylesheets="@stylesheets/OrderForm.css" VBox.vgrow="ALWAYS">
+                    style="-fx-background-color: white;" stylesheets="@../stylesheets/OrderForm.css" VBox.vgrow="ALWAYS">
             <columns>
                <TableColumn id="tblItemId" editable="false" prefWidth="72.0" text="Item ID"/>
                <TableColumn id="tblItemName" editable="false" prefWidth="161.0" sortable="false" text="Item Name"/>

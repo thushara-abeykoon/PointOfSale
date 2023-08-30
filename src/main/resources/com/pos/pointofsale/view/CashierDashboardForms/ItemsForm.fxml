@@ -30,7 +30,7 @@
    </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <TableView fx:id="tblItems" focusTraversable="false" prefHeight="134.0" prefWidth="528.0" stylesheets="@stylesheets/OrderForm.css" VBox.vgrow="ALWAYS">
+         <TableView fx:id="tblItems" focusTraversable="false" prefHeight="134.0" prefWidth="528.0" stylesheets="@../stylesheets/OrderForm.css" VBox.vgrow="ALWAYS">
             <columns>
                <TableColumn prefWidth="100.0" text="Item ID" />
                <TableColumn prefWidth="132.0" text="Item Name" />

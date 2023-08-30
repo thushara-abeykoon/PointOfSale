@@ -11,7 +11,7 @@
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.HistoryController">
    <center>
-      <TableView fx:id="tblOrderHistory" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="tblOrderHistory" prefHeight="200.0" prefWidth="200.0" stylesheets="@../stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn prefWidth="75.0" text="Order ID" />
           <TableColumn prefWidth="75.0" text="Total Price" />

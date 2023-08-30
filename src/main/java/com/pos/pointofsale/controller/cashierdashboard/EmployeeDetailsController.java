@@ -1,4 +1,4 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
-public class SettingsController {
+public class EmployeeDetailsController {
 }

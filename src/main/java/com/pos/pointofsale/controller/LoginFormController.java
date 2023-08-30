@@ -88,6 +88,7 @@ public class LoginFormController {
         }
         else{
             try {
+
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee_computer (emp_id,cmp_id,login,logout) VALUES (?,?,current_timestamp(),current_timestamp())");
                 preparedStatement.setObject(1,txtEmployeeID.getText());
                 preparedStatement.setObject(2,txtComputerID.getText());

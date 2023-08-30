@@ -28,7 +28,7 @@ public class DatabaseConnector {
                 statement.executeUpdate("CREATE TABLE item (itm_id VARCHAR(10) PRIMARY KEY, itm_name VARCHAR(20) NOT NULL, itm_desc VARCHAR(100), price DECIMAL(10, 2) NOT NULL);");
                 statement.executeUpdate("CREATE TABLE orders (order_id VARCHAR(20) PRIMARY KEY, order_time TIME NOT NULL, order_date DATE NOT NULL, total_price DECIMAL(10, 2) NOT NULL, emp_id VARCHAR(7) NOT NULL, FOREIGN KEY (emp_id) REFERENCES employee(emp_id));");
                 statement.executeUpdate("CREATE TABLE order_item (order_id VARCHAR(20) NOT NULL, itm_id VARCHAR(10) NOT NULL, quantity INT, FOREIGN KEY (order_id) REFERENCES orders(order_id), FOREIGN KEY (itm_id) REFERENCES item(itm_id));");
-
+                statement.executeUpdate("INSERT INTO employee (emp_id, fname, lname, email, password) VALUES ('admin','Admin','Admin','admin@gmail.com',MD5('1234'))");
 
             } catch (SQLException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR,"Database Connection Error!");

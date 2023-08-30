@@ -5,10 +5,7 @@ import com.pos.pointofsale.controller.cashierdashboard.CashierFormController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -16,6 +13,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Optional;
 
 public class LoginFormController {
 
@@ -87,30 +85,48 @@ public class LoginFormController {
             txtEmployeeID.requestFocus();
         }
         else{
-            try {
+            if (txtEmployeeID.getText().equals("admin")){
+                ButtonType admin = new ButtonType("Admin", ButtonBar.ButtonData.OK_DONE);
+                ButtonType cashier = new ButtonType("Cashier", ButtonBar.ButtonData.OK_DONE);
 
-                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee_computer (emp_id,cmp_id,login,logout) VALUES (?,?,current_timestamp(),current_timestamp())");
-                preparedStatement.setObject(1,txtEmployeeID.getText());
-                preparedStatement.setObject(2,txtComputerID.getText());
-                int status = preparedStatement.executeUpdate();
-                getLogId();
-                if (status>0){
-                    cmpId = txtComputerID.getText();
-                    CashierFormController.empId = txtEmployeeID.getText();
-                    StageController stageController = new StageController();
-                    scene = stageController.loadScene("view/CashierForm.fxml");
-                    Stage stage = new Stage();
-                    stage.getIcons().add(StageController.getIcon());
-                    stage.setTitle("Cashier Dashboard");
-                    stage.setScene(scene);
-                    stage.centerOnScreen();
-                    stage.setMaximized(true);
-                    stage.show();
-                    StageController.closeStage(root);
+                Alert alert = new Alert(Alert.AlertType.NONE,"Log as?",admin,cashier);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if (buttonType.get().equals(admin)){
+                    logFormGenerator("view/AdminDashboard.fxml","Admin Dashboard");
                 }
-            } catch (SQLException | IOException e) {
-                throw new RuntimeException(e);
+                else {
+                    logFormGenerator("view/CashierForm.fxml","Cashier Dashboard");
+                }
             }
+            else {
+                logFormGenerator("view/CashierForm.fxml","Cashier Dashboard");
+            }
+        }
+    }
+
+    private void logFormGenerator(String fxml, String title){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee_computer (emp_id,cmp_id,login,logout) VALUES (?,?,current_timestamp(),current_timestamp())");
+            preparedStatement.setObject(1,txtEmployeeID.getText());
+            preparedStatement.setObject(2,txtComputerID.getText());
+            int status = preparedStatement.executeUpdate();
+            getLogId();
+            if (status>0){
+                cmpId = txtComputerID.getText();
+                CashierFormController.empId = txtEmployeeID.getText();
+                StageController stageController = new StageController();
+                scene = stageController.loadScene(fxml);
+                Stage stage = new Stage();
+                stage.getIcons().add(StageController.getIcon());
+                stage.setTitle(title);
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.setMaximized(true);
+                stage.show();
+                StageController.closeStage(root);
+            }
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

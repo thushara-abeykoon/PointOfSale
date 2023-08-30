@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.ItemsController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.CashierItemsController">
    <top>
       <Pane prefHeight="109.0" prefWidth="600.0" style="-fx-background-color: #282929;" BorderPane.alignment="CENTER">
          <Label layoutX="36.0" layoutY="24.0" text="ITEMS" textFill="WHITE">

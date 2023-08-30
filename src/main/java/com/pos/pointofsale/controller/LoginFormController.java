@@ -1,7 +1,7 @@
 package com.pos.pointofsale.controller;
 
 import com.pos.pointofsale.StageController;
-import com.pos.pointofsale.controller.cashierdashboard.CashierDashboardController;
+import com.pos.pointofsale.controller.cashierdashboard.CashierFormController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.scene.Scene;
@@ -96,9 +96,9 @@ public class LoginFormController {
                 getLogId();
                 if (status>0){
                     cmpId = txtComputerID.getText();
-                    CashierDashboardController.empId = txtEmployeeID.getText();
+                    CashierFormController.empId = txtEmployeeID.getText();
                     StageController stageController = new StageController();
-                    scene = stageController.loadScene("view/CashierDashboard.fxml");
+                    scene = stageController.loadScene("view/CashierForm.fxml");
                     Stage stage = new Stage();
                     stage.getIcons().add(StageController.getIcon());
                     stage.setTitle("Cashier Dashboard");

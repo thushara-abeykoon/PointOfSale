@@ -12,12 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderDataController {
+public class CashierOrderDataController {
     public Label lblOrderItemId;
     public Label lblOrderHistoryItemTotal;
     public TableView<OrderDataTable> tblOrderHistoryItem;
-    private final String orderId = HistoryController.currentOrderId;
-    private final String orderTotal = HistoryController.currentOrderTotal;
+    private final String orderId = CashierHistoryController.currentOrderId;
+    private final String orderTotal = CashierHistoryController.currentOrderTotal;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
 
     public void initialize(){

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.OrderController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.CashierOrderController">
    <top>
       <Pane prefHeight="109.0" prefWidth="600.0" stylesheets="@stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
          <Label layoutX="36.0" layoutY="24.0" text="NEW ORDER!" textFill="WHITE">

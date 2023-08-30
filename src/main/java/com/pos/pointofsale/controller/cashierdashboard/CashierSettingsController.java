@@ -1,6 +1,6 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
-public class SettingsController {
+public class CashierSettingsController {
     public void getPrinters(){
 
     }

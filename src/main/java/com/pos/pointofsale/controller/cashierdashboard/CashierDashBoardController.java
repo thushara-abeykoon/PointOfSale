@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DashBoardController {
+public class CashierDashBoardController {
 
     public Label lblTodayRevenue;
     public Label lblYesterdayRevenue;
@@ -23,7 +23,7 @@ public class DashBoardController {
     public static BorderPane rootDashboard;
 
     public void initialize(){
-        empId = CashierDashboardController.empId;
+        empId = CashierFormController.empId;
         setLblTodayRevenue();
         setLblYesterdayRevenue();
         setLblAverageDailyRevenue();

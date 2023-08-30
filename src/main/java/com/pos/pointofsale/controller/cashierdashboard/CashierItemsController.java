@@ -9,11 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 
 import java.sql.*;
 
-public class ItemsController {
+public class CashierItemsController {
     public TableView<ItemsTable> tblItems;
     public TextField txtItemId;
     public TextField txtItemName;

@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class OrderController {
+public class CashierOrderController {
     public Label lblOrderId;
     public TextField txtItemId;
     public TextField txtItemName;
@@ -36,7 +36,7 @@ public class OrderController {
     private static String empId;
 
     public void initialize(){
-        empId = CashierDashboardController.empId;
+        empId = CashierFormController.empId;
         loadColumnData();
         txtTotal.setText("0.0");
         setItemsList();

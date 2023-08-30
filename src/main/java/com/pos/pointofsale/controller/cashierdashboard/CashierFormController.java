@@ -24,7 +24,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Timer;
 
-public class CashierDashboardController extends DashboardStyleConfiguration {
+public class CashierFormController extends DashboardStyleConfiguration {
 
     public VBox vboxLeft;
     public ImageView imgMore;
@@ -51,7 +51,7 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
         System.out.println(empId);
         setPaneActive(0);
         DashboardStyleConfiguration.setPaneBackground(paneDashboard,"#282929");
-        paneLoader("view/DashboardForm.fxml");
+        paneLoader("view/CashierDashboardForm.fxml");
         Timer timer = new Timer();
         EmployeeWorkHourUpdate employeeWorkHourUpdate = new EmployeeWorkHourUpdate(logId);
         timer.schedule(employeeWorkHourUpdate,0,1000);
@@ -100,33 +100,33 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
     }
 
     public void paneDashboardOnMouseClicked( ) {
-        paneLoader("view/DashboardForm.fxml");
+        paneLoader("view/CashierDashboardForm.fxml");
         setPaneActive(0);
         DashboardStyleConfiguration.setPaneBackground(paneDashboard,"#282929");
 
     }
 
     public void paneOrderOnMouseClicked( ) {
-        paneLoader("view/OrderForm.fxml");
+        paneLoader("view/CashierOrderForm.fxml");
         setPaneActive(1);
         DashboardStyleConfiguration.setPaneBackground(paneOrder,"#282929");
     }
 
     public void paneHistoryOnMouseClicked( ) {
-        paneLoader("view/HistoryForm.fxml");
+        paneLoader("view/CashierHistoryForm.fxml");
         setPaneActive(2);
         DashboardStyleConfiguration.setPaneBackground(paneHistory,"#282929");
     }
 
     public void paneItemsOnMouseClicked( ) {
-        paneLoader("view/ItemsForm.fxml");
+        paneLoader("view/CashierItemsForm.fxml");
         setPaneActive(3);
         DashboardStyleConfiguration.setPaneBackground(paneItems,"#282929");
     }
 
 
     public void paneSettingsOnMouseClicked( ) {
-        paneLoader("view/SettingsForm.fxml");
+        paneLoader("view/CashierSettingsForm.fxml");
         setPaneActive(4);
         DashboardStyleConfiguration.setPaneBackground(paneSettings,"#282929");
     }

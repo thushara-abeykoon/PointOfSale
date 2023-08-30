@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.admindashboard.AdminFormController">
+    <left>
+        <VBox fx:id="vboxLeft" prefHeight="563.0" prefWidth="62.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+            <Pane layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="64.0">
+                <ImageView fx:id="imgMore" fitHeight="30.0" fitWidth="30.0" layoutX="17.0" layoutY="2.0" onMouseClicked="#imgMoreOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <Image url="@../images/icons8-menu-96.png" />
+                </ImageView>
+            </Pane>
+            <Pane fx:id="paneDashboard" onMouseClicked="#paneDashboardOnMouseClicked" onMouseEntered="#paneDashboardOnMouseEntered" onMouseExited="#paneDashboardOnMouseExited" prefHeight="60.0" prefWidth="64.0">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <Image url="@../images/icons8-home-96.png" />
+                </ImageView>
+                <Label fx:id="lblDashboard" layoutX="54.0" layoutY="18.0" text="DASHBOARD" textFill="WHITE" visible="false">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+            </Pane>
+            <Pane fx:id="paneOrder" onMouseClicked="#paneOrderOnMouseClicked" onMouseEntered="#paneOrderOnMouseEntered" onMouseExited="#paneOrderOnMouseExited" prefHeight="60.0" prefWidth="64.0">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <Image url="@../images/icons8-employee-96.png" />
+                </ImageView>
+                <Label fx:id="lblOrder" layoutX="55.0" layoutY="16.0" text="EMPLOYEES" textFill="WHITE" visible="false">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+            </Pane>
+            <Pane fx:id="paneHistory" layoutX="10.0" layoutY="10.0" onMouseClicked="#paneHistoryOnMouseClicked" onMouseEntered="#paneHistoryOnMouseEntered" onMouseExited="#paneHistoryOnMouseExited" prefHeight="60.0" prefWidth="64.0">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <ImageView fitHeight="49.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <Image url="@../images/icons8-history-96.png" />
+                </ImageView>
+                <Label fx:id="lblHistory" layoutX="55.0" layoutY="17.0" text="HISTORY" textFill="WHITE" visible="false">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+            </Pane>
+            <Pane fx:id="paneItems" layoutX="10.0" layoutY="70.0" onMouseClicked="#paneItemsOnMouseClicked" onMouseEntered="#paneItemsOnMouseEntered" onMouseExited="#paneItemsOnMouseExited" prefHeight="60.0" prefWidth="64.0">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <ImageView fitHeight="43.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <Image url="@../images/icons8-list-view-96.png" />
+                </ImageView>
+                <Label fx:id="lblItems" layoutX="56.0" layoutY="17.0" text="ITEMS" textFill="WHITE" visible="false">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+            </Pane>
+            <Pane fx:id="paneSettings" layoutX="10.0" layoutY="190.0" onMouseClicked="#paneSettingsOnMouseClicked" onMouseEntered="#paneSettingsOnMouseEntered" onMouseExited="#paneSettingsOnMouseExited" prefHeight="60.0" prefWidth="64.0">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <ImageView fitHeight="43.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <Image url="@../images/icons8-support-96.png" />
+                </ImageView>
+                <Label fx:id="lblSettings" layoutX="55.0" layoutY="17.0" text="SETTINGS" textFill="WHITE" visible="false">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+            </Pane>
+            <Pane fx:id="paneEmpty" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="64.0" style="-fx-max-height: 1000px; -fx-min-height: 50px;" VBox.vgrow="ALWAYS">
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+            </Pane>
+            <Pane fx:id="paneLogOut" layoutX="10.0" layoutY="310.0" onMouseClicked="#paneLogOutOnMoseClicked" onMouseEntered="#paneLogOutOnMouseEntered" onMouseExited="#paneLogOutOnMouseExited" prefHeight="60.0" prefWidth="64.0">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <ImageView fitHeight="43.0" fitWidth="30.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <Image url="@../images/icons8-logout-100.png" />
+                </ImageView>
+                <Label fx:id="lblLogout" layoutX="55.0" layoutY="17.0" text="LOG OUT" textFill="WHITE" visible="false">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+            </Pane>
+        </VBox>
+    </left>
+</BorderPane>

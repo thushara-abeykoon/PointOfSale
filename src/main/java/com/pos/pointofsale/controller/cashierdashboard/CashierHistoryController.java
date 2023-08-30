@@ -16,14 +16,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HistoryController {
+public class CashierHistoryController {
     public TableView<OrderHistoryTable> tblOrderHistory;
     public String empId;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
     public static String currentOrderId;
     public static String currentOrderTotal;
     public void initialize(){
-        empId = CashierDashboardController.empId;
+        empId = CashierFormController.empId;
         tableColumnInitializer();
         loadListData();
         onRowClicked();
@@ -59,7 +59,7 @@ public class HistoryController {
                    currentOrderTotal = row.getItem().getTotalPrice();
                    StageController stageController = new StageController();
                    try {
-                       Stage stage = stageController.loadStage("view/OrderData.fxml", "Order Details");
+                       Stage stage = stageController.loadStage("view/CashierOrderData.fxml", "Order Details");
                        stage.setResizable(false);
                        stage.show();
 

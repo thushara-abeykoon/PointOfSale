@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.cashierdashboard.CashierSettingsController">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <Label layoutX="60.0" layoutY="55.0" text="Default Printer   : " textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="18.0"/>
+            </font>
+         </Label>
+         <ComboBox layoutX="217.0" layoutY="56.0" prefHeight="1.0" prefWidth="150.0" promptText="--Select a Printer--"
+                   style="-fx-background-color: white;">
+            <cursor>
+               <Cursor fx:constant="HAND"/>
+            </cursor>
+         </ComboBox>
+      </Pane>
+   </center>
+</BorderPane>

@@ -42,8 +42,8 @@ public class OrderController {
         setItemsList();
         AutoCompletionBinding<Object> objectAutoCompletionBinding = TextFields.bindAutoCompletion(txtItemName, itemsList.toArray());
         objectAutoCompletionBinding.setOnAutoCompleted(objectAutoCompletionEvent -> {
-            String itemId = txtItemName.getText().substring(0, 8);
-            String itemName = txtItemName.getText().substring(10);
+            String itemId = txtItemName.getText().substring(0, 10);
+            String itemName = txtItemName.getText().substring(12);
             txtItemName.setText(itemName);
             txtItemId.setText(itemId);
             txtItemPrice.setText(getItemPrice(itemId));

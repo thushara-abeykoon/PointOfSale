@@ -5,6 +5,11 @@ import com.pos.pointofsale.controller.cashierdashboard.DashboardStyleConfigurati
 
 public class AdminFormController extends CashierFormController {
     @Override
+    public void initialize() {
+        super.initialize();
+    }
+
+    @Override
     public void paneDashboardOnMouseClicked(){
         paneLoader("view/CashierDashboardForm.fxml");
         setPaneActive(0);

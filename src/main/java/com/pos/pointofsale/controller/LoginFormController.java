@@ -92,7 +92,7 @@ public class LoginFormController {
                 Alert alert = new Alert(Alert.AlertType.NONE,"Log as?",admin,cashier);
                 Optional<ButtonType> buttonType = alert.showAndWait();
                 if (buttonType.get().equals(admin)){
-                    logFormGenerator("view/AdminDashboard.fxml","Admin Dashboard");
+                    logFormGenerator("view/AdminForm.fxml","Admin Dashboard");
                 }
                 else {
                     logFormGenerator("view/CashierForm.fxml","Cashier Dashboard");

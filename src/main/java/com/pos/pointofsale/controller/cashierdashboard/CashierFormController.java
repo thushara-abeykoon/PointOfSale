@@ -58,6 +58,8 @@ public class CashierFormController extends DashboardStyleConfiguration {
     }
 
 
+
+
     public void imgMoreOnMouseClicked() {
         if (!isOptionVisible){
             Timeline timeline = animateVbox(0.15, 220);

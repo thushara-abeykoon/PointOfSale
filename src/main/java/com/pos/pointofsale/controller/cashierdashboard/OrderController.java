@@ -172,7 +172,6 @@ public class OrderController {
                 getTotal();
         });
     }
-
     public void getTotal(){
         if (txtItemPrice.getText().isEmpty())
             txtTotal.setText("0.00");
@@ -261,5 +260,7 @@ public class OrderController {
 
     }
 
+    public void printInvoice(){
 
+    }
 }

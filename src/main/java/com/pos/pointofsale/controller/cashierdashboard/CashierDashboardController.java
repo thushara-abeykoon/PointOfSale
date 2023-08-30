@@ -1,6 +1,7 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
 import com.pos.pointofsale.StageController;
+import com.pos.pointofsale.controller.EmployeeWorkHourUpdate;
 import com.pos.pointofsale.controller.LoginFormController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import javafx.animation.KeyFrame;
@@ -21,6 +22,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Timer;
 
 public class CashierDashboardController extends DashboardStyleConfiguration {
 
@@ -30,7 +32,6 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
     public Pane paneOrder;
     public Pane paneHistory;
     public Pane paneItems;
-    public Pane paneEmployeeDetails;
     public Pane paneSettings;
     public Pane paneLogOut;
     public Pane paneEmpty;
@@ -38,12 +39,11 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
     public Label lblOrder;
     public Label lblHistory;
     public Label lblItems;
-    public Label lblEmployeeDetails;
     public Label lblSettings;
     public Label lblLogout;
     public static boolean isOptionVisible = false;
     public BorderPane root;
-    private final boolean[] tabsLoaded = new boolean[6];
+    private final boolean[] tabsLoaded = new boolean[5];
     public String logId = LoginFormController.logId;
     public static String empId;
 
@@ -52,6 +52,9 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
         setPaneActive(0);
         DashboardStyleConfiguration.setPaneBackground(paneDashboard,"#282929");
         paneLoader("view/DashboardForm.fxml");
+        Timer timer = new Timer();
+        EmployeeWorkHourUpdate employeeWorkHourUpdate = new EmployeeWorkHourUpdate(logId);
+        timer.schedule(employeeWorkHourUpdate,0,1000);
     }
 
 
@@ -71,7 +74,7 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
     }
 
     private void setVisibleOptions(boolean visibility){
-        for (Label label : Arrays.asList(lblDashboard, lblOrder, lblHistory, lblItems, lblEmployeeDetails, lblSettings, lblLogout)) {
+        for (Label label : Arrays.asList(lblDashboard, lblOrder, lblHistory, lblItems, lblSettings, lblLogout)) {
             label.setVisible(visibility);
         }
     }
@@ -92,7 +95,6 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
         DashboardStyleConfiguration.setPaneBackground(paneOrder,"transparent");
         DashboardStyleConfiguration.setPaneBackground(paneHistory,"transparent");
         DashboardStyleConfiguration.setPaneBackground(paneItems,"transparent");
-        DashboardStyleConfiguration.setPaneBackground(paneEmployeeDetails,"transparent");
         DashboardStyleConfiguration.setPaneBackground(paneSettings,"transparent");
         tabsLoaded[index] = true;
     }
@@ -122,15 +124,10 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
         DashboardStyleConfiguration.setPaneBackground(paneItems,"#282929");
     }
 
-    public void paneEmployeeDetailsOnMouseClicked( ) {
-        paneLoader("view/EmployeeDetailsForm.fxml");
-        setPaneActive(4);
-        DashboardStyleConfiguration.setPaneBackground(paneEmployeeDetails,"#282929");
-    }
 
     public void paneSettingsOnMouseClicked( ) {
         paneLoader("view/SettingsForm.fxml");
-        setPaneActive(5);
+        setPaneActive(4);
         DashboardStyleConfiguration.setPaneBackground(paneSettings,"#282929");
     }
 
@@ -211,22 +208,13 @@ public class CashierDashboardController extends DashboardStyleConfiguration {
         DashboardStyleConfiguration.setPaneBackground(paneItems,"transparent");
     }
 
-    public void paneEmployeeDetailsOnMouseEntered( ) {
-        DashboardStyleConfiguration.setPaneBackground(paneEmployeeDetails,"#282929");
-    }
-
-    public void paneEmployeeDetailsOnMouseExited( ) {
-        if (tabsLoaded[4])
-            return;
-        DashboardStyleConfiguration.setPaneBackground(paneEmployeeDetails,"transparent");
-    }
 
     public void paneSettingsOnMouseEntered( ) {
         DashboardStyleConfiguration.setPaneBackground(paneSettings,"#282929");
     }
 
     public void paneSettingsOnMouseExited( ) {
-        if (tabsLoaded[5])
+        if (tabsLoaded[4])
             return;
         DashboardStyleConfiguration.setPaneBackground(paneSettings,"transparent");
     }

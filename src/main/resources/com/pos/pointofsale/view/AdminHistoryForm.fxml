@@ -13,6 +13,7 @@
         <TableView fx:id="tblOrderHistory" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheets/OrderForm.css" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn prefWidth="75.0" text="Order ID" />
+            <TableColumn prefWidth="75.0" text="Employee ID" />
                 <TableColumn prefWidth="75.0" text="Total Price" />
                 <TableColumn prefWidth="75.0" text="Order Date" />
                 <TableColumn prefWidth="75.0" text="Order Time" />

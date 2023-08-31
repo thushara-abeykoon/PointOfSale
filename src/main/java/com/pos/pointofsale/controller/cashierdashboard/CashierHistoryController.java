@@ -20,8 +20,6 @@ public class CashierHistoryController {
     public TableView<OrderHistoryTable> tblOrderHistory;
     public String empId;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
-    public static String currentOrderId;
-    public static String currentOrderTotal;
     public void initialize(){
         empId = CashierFormController.empId;
         tableColumnInitializer();
@@ -55,8 +53,8 @@ public class CashierHistoryController {
            TableRow<OrderHistoryTable> row = new TableRow<>();
            row.setOnMouseClicked(mouseEvent -> {
                if (!row.isEmpty() && mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 1) {
-                   currentOrderId = row.getItem().getOrderId();
-                   currentOrderTotal = row.getItem().getTotalPrice();
+                   CashierOrderDataController.orderId = row.getItem().getOrderId();
+                   CashierOrderDataController.orderTotal = row.getItem().getTotalPrice();
                    StageController stageController = new StageController();
                    try {
                        Stage stage = stageController.loadStage("view/CashierOrderData.fxml", "Order Details");

@@ -121,7 +121,7 @@ public class LoginFormController {
                 stage.setTitle(title);
                 stage.setScene(scene);
                 stage.centerOnScreen();
-                stage.setFullScreen(true);
+                stage.setMaximized(true);
                 stage.show();
                 StageController.closeStage(root);
             }

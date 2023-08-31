@@ -16,8 +16,8 @@ public class CashierOrderDataController {
     public Label lblOrderItemId;
     public Label lblOrderHistoryItemTotal;
     public TableView<OrderDataTable> tblOrderHistoryItem;
-    private final String orderId = CashierHistoryController.currentOrderId;
-    private final String orderTotal = CashierHistoryController.currentOrderTotal;
+    public static String orderId;
+    public static String orderTotal;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
 
     public void initialize(){

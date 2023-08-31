@@ -7,11 +7,14 @@ public class AdminFormController extends CashierFormController {
     @Override
     public void initialize() {
         super.initialize();
+        paneLoader("view/AdminDashboardForm.fxml");
+        setPaneActive(0);
+        DashboardStyleConfiguration.setPaneBackground(paneDashboard,"#282929");
     }
 
     @Override
     public void paneDashboardOnMouseClicked(){
-        paneLoader("view/CashierDashboardForm.fxml");
+        paneLoader("view/AdminDashboardForm.fxml");
         setPaneActive(0);
         DashboardStyleConfiguration.setPaneBackground(paneDashboard,"#282929");
     }

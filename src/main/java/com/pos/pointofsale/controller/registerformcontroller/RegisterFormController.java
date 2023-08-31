@@ -69,12 +69,13 @@ public class RegisterFormController {
         } else{
 
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee(emp_id,fname,lname,email,password) VALUES (?,?,?,?,MD5(?));");
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee(emp_id,fname,lname,email,phone_no,password) VALUES (?,?,?,?,?,MD5(?));");
                 preparedStatement.setObject(1,txtEmpID.getText());
                 preparedStatement.setObject(2,txtFirstName.getText());
                 preparedStatement.setObject(3,txtLastName.getText());
                 preparedStatement.setObject(4,txtEmail.getText());
-                preparedStatement.setObject(5,txtPassword.getText());
+                preparedStatement.setObject(5,txtPhoneNo.getText());
+                preparedStatement.setObject(6,txtPassword.getText());
                 int status = preparedStatement.executeUpdate();
                 if (status>0) {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"ACCOUNT CREATED!!", ButtonType.OK);

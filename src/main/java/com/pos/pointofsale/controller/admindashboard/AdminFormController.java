@@ -1,7 +1,11 @@
 package com.pos.pointofsale.controller.admindashboard;
 
+import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.controller.cashierdashboard.CashierFormController;
 import com.pos.pointofsale.controller.cashierdashboard.DashboardStyleConfiguration;
+import javafx.scene.Scene;
+
+import java.io.IOException;
 
 public class AdminFormController extends CashierFormController {
     @Override

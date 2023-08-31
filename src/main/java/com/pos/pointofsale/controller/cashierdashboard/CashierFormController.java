@@ -46,14 +46,16 @@ public class CashierFormController extends DashboardStyleConfiguration {
     private final boolean[] tabsLoaded = new boolean[5];
     public String logId = LoginFormController.logId;
     public static String empId;
+    public static EmployeeWorkHourUpdate employeeWorkHourUpdate;
+    public static Timer timer;
 
     public void initialize(){
         System.out.println(empId);
         setPaneActive(0);
         DashboardStyleConfiguration.setPaneBackground(paneDashboard,"#282929");
         paneLoader("view/CashierDashboardForm.fxml");
-        Timer timer = new Timer();
-        EmployeeWorkHourUpdate employeeWorkHourUpdate = new EmployeeWorkHourUpdate(logId);
+        timer = new Timer();
+        employeeWorkHourUpdate = new EmployeeWorkHourUpdate(logId);
         timer.schedule(employeeWorkHourUpdate,0,1000);
     }
 
@@ -135,6 +137,8 @@ public class CashierFormController extends DashboardStyleConfiguration {
 
     public void paneLogOutOnMoseClicked( ) {
         onLogout();
+        employeeWorkHourUpdate.cancel();
+        timer.purge();
     }
 
     public void onLogout(){

@@ -83,7 +83,7 @@ public class AdminDashboardFormController {
     }
     private void setLblEarningsRate(){
         double currentYesterdayRevenue = Double.parseDouble(lblAverageDailyRevenue.getText().substring(0,lblAverageDailyRevenue.getText().length()-4));
-        Double average;
+        double average;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT SUM(total_price) FROM orders WHERE orders.order_date != curdate()");
             ResultSet totalSum = preparedStatement.executeQuery();
@@ -105,6 +105,10 @@ public class AdminDashboardFormController {
         AdminTotalOrdersUpdater adminTotalOrdersUpdater = new AdminTotalOrdersUpdater(lblDailyTotalOrders);
         Timer timer = new Timer();
         timer.schedule(adminTotalOrdersUpdater,0,1000);
+        Runtime.getRuntime().addShutdownHook(new Thread(()->{
+            adminTotalOrdersUpdater.cancel();
+            timer.purge();
+        }));
     }
 
     public void setLblNoOfEmployees(){

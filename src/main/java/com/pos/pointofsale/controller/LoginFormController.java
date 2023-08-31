@@ -1,7 +1,10 @@
 package com.pos.pointofsale.controller;
 
 import com.pos.pointofsale.StageController;
+import com.pos.pointofsale.controller.admindashboard.AdminDashboardFormController;
+import com.pos.pointofsale.controller.admindashboard.AdminFormController;
 import com.pos.pointofsale.controller.cashierdashboard.CashierFormController;
+import com.pos.pointofsale.controller.cashierdashboard.CashierHistoryController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.scene.Scene;
@@ -92,19 +95,35 @@ public class LoginFormController {
                 Alert alert = new Alert(Alert.AlertType.NONE,"Log as?",admin,cashier);
                 Optional<ButtonType> buttonType = alert.showAndWait();
                 if (buttonType.get().equals(admin)){
-                    logFormGenerator("view/AdminForm.fxml","Admin Dashboard");
+                    Stage stage = logFormGenerator("view/AdminForm.fxml", "Admin Dashboard");
+                    assert stage != null;
+                    stage.setOnCloseRequest(windowEvent -> {
+                        System.exit(0);
+                    });
                 }
                 else {
-                    logFormGenerator("view/CashierForm.fxml","Cashier Dashboard");
+                    Stage stage = logFormGenerator("view/CashierForm.fxml", "Cashier Dashboard");
+                    assert stage != null;
+                    stage.setOnCloseRequest(windowEvent -> {
+                        System.exit(0);
+                    });
                 }
             }
             else {
-                logFormGenerator("view/CashierForm.fxml","Cashier Dashboard");
+                Stage stage = logFormGenerator("view/CashierForm.fxml", "Cashier Dashboard");
+                assert stage != null;
+                stage.setOnCloseRequest(windowEvent -> {
+                    System.exit(0);
+                });
             }
         }
     }
 
-    private void logFormGenerator(String fxml, String title){
+    public void getLoginUpdateCancel(){
+
+    }
+
+    private Stage logFormGenerator(String fxml, String title){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employee_computer (emp_id,cmp_id,login,logout) VALUES (?,?,current_timestamp(),current_timestamp())");
             preparedStatement.setObject(1,txtEmployeeID.getText());
@@ -124,10 +143,12 @@ public class LoginFormController {
                 stage.setMaximized(true);
                 stage.show();
                 StageController.closeStage(root);
+                return stage;
             }
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     private void getLogId() throws SQLException {

@@ -20,24 +20,21 @@ public class AdminFormController extends CashierFormController {
     }
     @Override
     public void paneOrderOnMouseClicked(){
-        paneLoader("view/CashierOrderForm.fxml");
+        paneLoader("view/AdminEmployeesForm.fxml");
         setPaneActive(1);
         DashboardStyleConfiguration.setPaneBackground(paneOrder,"#282929");
     }
     @Override
     public void paneHistoryOnMouseClicked(){
-        paneLoader("view/CashierOrderForm.fxml");
+        paneLoader("view/AdminHistoryForm.fxml");
         setPaneActive(2);
-        DashboardStyleConfiguration.setPaneBackground(paneOrder,"#282929");
+        DashboardStyleConfiguration.setPaneBackground(paneHistory,"#282929");
     }
-    public void paneItemsOnMouseClicked(){
-        paneLoader("view/CashierOrderForm.fxml");
-        setPaneActive(3);
-        DashboardStyleConfiguration.setPaneBackground(paneOrder,"#282929");
-    }
+
+    @Override
     public void paneSettingsOnMouseClicked(){
-        paneLoader("view/CashierOrderForm.fxml");
+        paneLoader("view/AdminSettingsForm.fxml");
         setPaneActive(4);
-        DashboardStyleConfiguration.setPaneBackground(paneOrder,"#282929");
+        DashboardStyleConfiguration.setPaneBackground(paneSettings,"#282929");
     }
 }

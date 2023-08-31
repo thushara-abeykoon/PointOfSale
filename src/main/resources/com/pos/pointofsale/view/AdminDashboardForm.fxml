@@ -116,55 +116,51 @@
                 </Label>
 
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;"
-                  GridPane.rowIndex="2">
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.rowIndex="2">
                 <Label layoutX="16.0" layoutY="10.0" text="No of Employees">
                     <font>
-                        <Font name="System Bold Italic" size="14.0"/>
+                        <Font name="System Bold Italic" size="14.0" />
                     </font>
                 </Label>
                 <Label fx:id="lblNoOfEmployees" contentDisplay="CENTER" layoutX="16.0" layoutY="38.0" text="0">
                     <font>
-                        <Font name="System Bold" size="24.0"/>
+                        <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;"
-                  GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <Label layoutX="16.0" layoutY="10.0" text="No of Computers">
                     <font>
-                        <Font name="System Bold Italic" size="14.0"/>
+                        <Font name="System Bold Italic" size="14.0" />
                     </font>
                 </Label>
                 <Label fx:id="lblNoOfComputers" contentDisplay="CENTER" layoutX="16.0" layoutY="38.0" text="0">
                     <font>
-                        <Font name="System Bold" size="24.0"/>
+                        <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;"
-                  GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                 <Label layoutX="16.0" layoutY="10.0" text="Daily Total Orders">
                     <font>
-                        <Font name="System Bold Italic" size="14.0"/>
+                        <Font name="System Bold Italic" size="14.0" />
                     </font>
                 </Label>
                 <Label fx:id="lblDailyTotalOrders" contentDisplay="CENTER" layoutX="16.0" layoutY="38.0" text="0">
                     <font>
-                        <Font name="System Bold" size="24.0"/>
+                        <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;"
-                  GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray; -fx-background-radius: 20px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                 <Label layoutX="16.0" layoutY="10.0" text="Monthly Total Orders">
                     <font>
-                        <Font name="System Bold Italic" size="14.0"/>
+                        <Font name="System Bold Italic" size="14.0" />
                     </font>
                 </Label>
                 <Label fx:id="lblMonthlyTotalOrders" contentDisplay="CENTER" layoutX="16.0" layoutY="38.0" text="0">
                     <font>
-                        <Font name="System Bold" size="24.0"/>
+                        <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
             </Pane>

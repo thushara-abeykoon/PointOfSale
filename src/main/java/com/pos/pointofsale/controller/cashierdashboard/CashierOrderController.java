@@ -2,12 +2,15 @@ package com.pos.pointofsale.controller.cashierdashboard;
 
 import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.database.DatabaseConnector;
+import com.pos.pointofsale.model.InvoiceOrderItems;
 import com.pos.pointofsale.model.OrderTable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -16,8 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class CashierOrderController {
     public Label lblOrderId;
@@ -213,6 +215,7 @@ public class CashierOrderController {
             int status = preparedStatement.executeUpdate();
             if (status>0){
                 insertIntoOrderItemTable(currentOrderID);
+                printInvoice();
                 orderItems.clear();
                 lblTotalPrice.setText("TOTAL = 0.00 LKR");
                 tblViewOrder.refresh();
@@ -221,7 +224,6 @@ public class CashierOrderController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void loadTableData() {
@@ -260,7 +262,27 @@ public class CashierOrderController {
 
     }
 
-    public void printInvoice(){
-
+    public void printInvoice() throws SQLException {
+        String jrxmlPath = "E:\\PROJECTS\\JavaFX Projects\\PointOfSale\\src\\main\\resources\\com\\pos\\pointofsale\\jasper\\invoice.jrxml";
+        Map<String,Object> parameters = new HashMap<>();
+        parameters.put("orderId",lblOrderId.getText());
+        parameters.put("totalAmount",lblTotalPrice.getText());
+        List<InvoiceOrderItems> orderItemsList = new ArrayList<>();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT order_item.itm_id,i.itm_name, i.price, order_item.quantity, order_item.quantity*i.price as total FROM order_item JOIN item i on i.itm_id = order_item.itm_id  WHERE order_id = ?");
+        preparedStatement.setObject(1,lblOrderId.getText());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(1) + resultSet.getString(2) + resultSet.getString(3) + resultSet.getString(4) + resultSet.getString(5));
+            orderItemsList.add(new InvoiceOrderItems(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5)));
+        }
+        JRBeanCollectionDataSource orderItems = new JRBeanCollectionDataSource(orderItemsList);
+        parameters.put("OrderItems",orderItems);
+        try {
+            JasperReport report = JasperCompileManager.compileReport(jrxmlPath);
+            JasperPrint print = JasperFillManager.fillReport(report,parameters,new JREmptyDataSource());
+            JasperExportManager.exportReportToPdfFile(print,"E:\\PROJECTS\\JavaFX Projects\\PointOfSale\\src\\main\\resources\\com\\pos\\pointofsale\\jasper\\invoice.pdf");
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

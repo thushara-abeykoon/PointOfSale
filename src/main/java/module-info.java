@@ -5,6 +5,7 @@ module com.pos.pointofsale {
     requires java.sql;
     requires mysql.connector.j;
     requires org.controlsfx.controls;
+    requires jasperreports;
 
     opens com.pos.pointofsale.model to javafx.fxml;
     opens com.pos.pointofsale to javafx.fxml;

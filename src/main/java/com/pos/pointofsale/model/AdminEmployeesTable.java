@@ -5,13 +5,11 @@ public class AdminEmployeesTable {
     private String empName;
     private String empEmail;
     private String phoneNo;
-    private String ordersCompleted;
-    public AdminEmployeesTable(String empId, String empName, String empEmail, String phoneNo, String ordersCompleted) {
+    public AdminEmployeesTable(String empId, String empName, String empEmail, String phoneNo) {
         this.empId = empId;
         this.empName = empName;
         this.empEmail = empEmail;
         this.phoneNo = phoneNo;
-        this.ordersCompleted = ordersCompleted;
     }
 
     public String getEmpId() {
@@ -46,12 +44,5 @@ public class AdminEmployeesTable {
         this.phoneNo = phoneNo;
     }
 
-    public String getOrdersCompleted() {
-        return ordersCompleted;
-    }
-
-    public void setOrdersCompleted(String ordersCompleted) {
-        this.ordersCompleted = ordersCompleted;
-    }
 
 }

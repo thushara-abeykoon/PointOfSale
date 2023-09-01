@@ -26,7 +26,7 @@ public class RegisterFormController {
     public PasswordField txtPassword;
     public PasswordField txtConfirmPassword;
     public TextField txtEmail;
-    public static Label emailExistStatus;
+    public Label emailExistStatus;
     static Connection connection = DatabaseConnector.getInstance().getConnection();
 
     public void initialize(){
@@ -93,9 +93,10 @@ public class RegisterFormController {
         }
     }
 
-    public static boolean isEmailExists(String email){
+    public boolean isEmailExists(String email){
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select email from employee where email = '"+email+"';");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT email FROM employee WHERE email = ?");
+            preparedStatement.setObject(1,email);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {

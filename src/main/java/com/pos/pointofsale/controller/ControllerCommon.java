@@ -92,12 +92,14 @@ public class ControllerCommon {
         return "";
     }
     public static void textFieldFilter(TextField textField){
-        textField.addEventFilter(KeyEvent.KEY_TYPED, event->{
-            String character = event.getCharacter();
+        keyFilter(textField,"0123456789.");
+    }
 
-            String allowedCharacters = "0123456789.";
+    public static void keyFilter(TextField textField, String allowedCharacters){
+        textField.addEventFilter(KeyEvent.KEY_TYPED,keyEvent -> {
+            String character = keyEvent.getCharacter();
             if (!allowedCharacters.contains(character))
-                event.consume();
+                keyEvent.consume();
         });
     }
 

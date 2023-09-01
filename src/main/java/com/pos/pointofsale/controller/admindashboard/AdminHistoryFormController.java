@@ -1,7 +1,6 @@
 package com.pos.pointofsale.controller.admindashboard;
 
 import com.pos.pointofsale.StageController;
-import com.pos.pointofsale.controller.cashierdashboard.CashierOrderController;
 import com.pos.pointofsale.controller.cashierdashboard.CashierOrderDataController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.AdminHistoryTable;

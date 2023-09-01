@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.SettingsForm">
+<BorderPane style="-fx-background-color: #282929;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pos.pointofsale.controller.SettingsFormController">
    <top>
       <Pane prefHeight="109.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <Label layoutX="36.0" layoutY="24.0" text="SETTINGS" textFill="WHITE">

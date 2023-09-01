@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.TimerTask;
 
 public class AdminRevenueUpdater extends TimerTask {
-    private String date;
-    private Label label;
-    private Connection connection = DatabaseConnector.getInstance().getConnection();
+    private final String date;
+    private final Label label;
+    private final Connection connection = DatabaseConnector.getInstance().getConnection();
 
     public AdminRevenueUpdater(String date, Label label) {
         this.date = date;

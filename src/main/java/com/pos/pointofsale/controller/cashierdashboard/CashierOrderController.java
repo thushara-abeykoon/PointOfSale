@@ -2,7 +2,6 @@ package com.pos.pointofsale.controller.cashierdashboard;
 
 import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.database.DatabaseConnector;
-import com.pos.pointofsale.model.InvoiceOrderItems;
 import com.pos.pointofsale.model.OrderTable;
 import com.pos.pointofsale.tasks.PrintInvoice;
 import javafx.beans.binding.Bindings;
@@ -10,8 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -20,7 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class CashierOrderController {
     public Label lblOrderId;

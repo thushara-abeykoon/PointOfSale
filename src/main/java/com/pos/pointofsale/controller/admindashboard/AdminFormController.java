@@ -1,11 +1,7 @@
 package com.pos.pointofsale.controller.admindashboard;
 
-import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.controller.cashierdashboard.CashierFormController;
 import com.pos.pointofsale.controller.cashierdashboard.DashboardStyleConfiguration;
-import javafx.scene.Scene;
-
-import java.io.IOException;
 
 public class AdminFormController extends CashierFormController {
     @Override
@@ -35,10 +31,4 @@ public class AdminFormController extends CashierFormController {
         DashboardStyleConfiguration.setPaneBackground(paneHistory,"#282929");
     }
 
-    @Override
-    public void paneSettingsOnMouseClicked(){
-        paneLoader("view/SettingsForm.fxml");
-        setPaneActive(4);
-        DashboardStyleConfiguration.setPaneBackground(paneSettings,"#282929");
-    }
 }

@@ -102,7 +102,6 @@ public class AdminDashboardFormController {
             throw new RuntimeException(e);
         }
     }
-
     public void setLblDailyTotalOrders() {
         AdminTotalOrdersUpdater adminTotalOrdersUpdater = new AdminTotalOrdersUpdater(lblDailyTotalOrders);
         Timer timer = new Timer();

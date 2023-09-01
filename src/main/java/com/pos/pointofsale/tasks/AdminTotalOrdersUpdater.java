@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.TimerTask;
 
 public class AdminTotalOrdersUpdater extends TimerTask {
-    private Label label;
+    private final Label label;
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
 
     public AdminTotalOrdersUpdater(Label label) {

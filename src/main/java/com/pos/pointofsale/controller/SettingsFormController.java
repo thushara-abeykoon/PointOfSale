@@ -1,19 +1,25 @@
 package com.pos.pointofsale.controller;
 
+import com.pos.pointofsale.StageController;
 import com.pos.pointofsale.controller.cashierdashboard.CashierFormController;
+import com.pos.pointofsale.controller.registerformcontroller.RegisterFormController;
+import com.pos.pointofsale.controller.registerformcontroller.RegisterValidation;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.PrinterComboBox;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.print.*;
 
-public class SettingsForm {
+public class SettingsFormController {
     public Label lblEmpId;
     public TextField txtFname;
     public TextField txtLname;
@@ -28,6 +34,7 @@ public class SettingsForm {
         lblEmpId.setText(CashierFormController.empId);
         getTextFieldValues();
         getPrinters();
+        ControllerCommon.keyFilter(txtPhoneNo,"0123456789+");
     }
     private void getTextFieldValues(){
         try {
@@ -45,17 +52,28 @@ public class SettingsForm {
         }
 
     }
-    public void btnChangePassword(ActionEvent event) {
+    public void btnChangePassword() {
+        ChangePasswordFormController.empId = lblEmpId.getText();
+        StageController stageController = new StageController();
+        try {
+            Stage stage = stageController.loadStage("view/ChangePasswordForm.fxml", "Change Password");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void btnSaveChangesOnAction(ActionEvent event) {
+    public void btnSaveChangesOnAction() {
         if (txtFname.getText().isEmpty())
             txtFname.requestFocus();
         else if (txtLname.getText().isEmpty()) {
             txtLname.requestFocus();
-        } else if (txtEmail.getText().isEmpty()) {
+        } else if (txtEmail.getText().isEmpty() || RegisterValidation.isvalidEmail(txtEmail.getText()) || RegisterFormController.isEmailExists(txtEmail.getText())) {
+            txtEmail.clear();
             txtEmail.requestFocus();
-        } else if (txtPhoneNo.getText().isEmpty()) {
+        } else if (txtPhoneNo.getText().isEmpty() || RegisterValidation.invalidMobileNumber(txtPhoneNo.getText())) {
+            txtPhoneNo.clear();
             txtPhoneNo.requestFocus();
         }
         else {
@@ -82,7 +100,6 @@ public class SettingsForm {
     }
 
     private void getPrinters(){
-        PrintService defaultPrinter = PrintServiceLookup.lookupDefaultPrintService();
         PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null,null);
         ObservableList<PrinterComboBox> items = cmbPrinter.getItems();
         items.clear();

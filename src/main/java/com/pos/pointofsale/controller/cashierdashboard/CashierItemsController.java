@@ -5,10 +5,8 @@ import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.ItemsTable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 
 import java.sql.*;
 
@@ -139,23 +137,23 @@ public class CashierItemsController {
         tblItems.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("itemPrice"));
     }
 
-    public void txtItemNameOnAction(ActionEvent event) {
+    public void txtItemNameOnAction() {
         txtItemDescription.requestFocus();
     }
 
-    public void txtItemDescriptionOnAction(ActionEvent event) {
+    public void txtItemDescriptionOnAction() {
         txtItemPrice.requestFocus();
     }
 
-    public void txtItemPriceOnAction(ActionEvent event) {
+    public void txtItemPriceOnAction() {
         addItem();
     }
 
-    public void btnAddNewItemOnAction(ActionEvent event) {
+    public void btnAddNewItemOnAction() {
         addItem();
     }
 
-    public void txtItemPriceOnKeyTyped(KeyEvent keyEvent) {
+    public void txtItemPriceOnKeyTyped() {
     }
 
     private String getItemId(){

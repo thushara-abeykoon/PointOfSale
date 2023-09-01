@@ -26,8 +26,8 @@ public class RegisterFormController {
     public PasswordField txtPassword;
     public PasswordField txtConfirmPassword;
     public TextField txtEmail;
-    public Label emailExistStatus;
-    Connection connection = DatabaseConnector.getInstance().getConnection();
+    public static Label emailExistStatus;
+    static Connection connection = DatabaseConnector.getInstance().getConnection();
 
     public void initialize(){
         ControllerCommon controllerCommon = new ControllerCommon();
@@ -53,17 +53,17 @@ public class RegisterFormController {
             txtFirstName.requestFocus();
         else if (txtLastName.getText().isEmpty())
             txtLastName.requestFocus();
-        else if (txtEmail.getText().isEmpty()|| registerValidation.isvalidEmail(txtEmail.getText()) ||isEmailExists(txtEmail.getText())) {
+        else if (txtEmail.getText().isEmpty()|| RegisterValidation.isvalidEmail(txtEmail.getText()) ||isEmailExists(txtEmail.getText())) {
             txtEmail.clear();
             txtEmail.setStyle("-fx-background-color: white");
             txtEmail.requestFocus();
         }
-        else if (registerValidation.invalidPassword(txtPassword.getText())){
+        else if (RegisterValidation.invalidPassword(txtPassword.getText())){
             txtPassword.clear();
             txtConfirmPassword.clear();
             txtPasswordsSetBackgroundColor("white");
             txtPassword.requestFocus();
-        } else if (registerValidation.invalidMobileNumber(txtPhoneNo.getText())) {
+        } else if (RegisterValidation.invalidMobileNumber(txtPhoneNo.getText())) {
             txtPhoneNo.clear();
             txtPhoneNo.requestFocus();
         } else{
@@ -93,7 +93,7 @@ public class RegisterFormController {
         }
     }
 
-    private boolean isEmailExists(String email){
+    public static boolean isEmailExists(String email){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("select email from employee where email = '"+email+"';");
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -111,14 +111,14 @@ public class RegisterFormController {
 
     public void txtEmailOnKeyTyped() {
         emailExistStatus.setVisible(false);
-        if (registerValidation.isvalidEmail(txtEmail.getText()) ||isEmailExists(txtEmail.getText()))
+        if (RegisterValidation.isvalidEmail(txtEmail.getText()) ||isEmailExists(txtEmail.getText()))
             txtEmail.setStyle("-fx-background-color: #ff7070");
         else
             txtEmail.setStyle("-fx-background-color: white");
     }
 
     public void txtPasswordOnKeyTyped() {
-        if (registerValidation.invalidPassword(txtPassword.getText()))
+        if (RegisterValidation.invalidPassword(txtPassword.getText()))
             txtPasswordsSetBackgroundColor("#ff7070");
         else {
             txtPassword.setStyle("-fx-background-color: white");
@@ -128,7 +128,7 @@ public class RegisterFormController {
     }
 
     public void txtConfirmPasswordOnKeyTyped() {
-        if (!txtPassword.getText().equals(txtConfirmPassword.getText())|| registerValidation.invalidPassword(txtConfirmPassword.getText()))
+        if (!txtPassword.getText().equals(txtConfirmPassword.getText())|| RegisterValidation.invalidPassword(txtConfirmPassword.getText()))
             txtConfirmPassword.setStyle("-fx-background-color: #ff7070");
         else
             txtPasswordsSetBackgroundColor("white");
@@ -141,12 +141,6 @@ public class RegisterFormController {
 
 
     public void txtPhoneNoEventFilter(){
-        txtPhoneNo.addEventFilter(KeyEvent.KEY_TYPED, event->{
-            String character = event.getCharacter();
-
-            String allowedCharacters = "0123456789";
-            if (!allowedCharacters.contains(character))
-                event.consume();
-        });
+        ControllerCommon.keyFilter(txtPhoneNo,"0123456789+");
     }
 }

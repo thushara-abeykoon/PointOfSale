@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 public class EmployeeWorkHourUpdate extends TimerTask {
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
-    private String logId;
+    private final String logId;
 
     public EmployeeWorkHourUpdate(String logId) {
         this.logId = logId;

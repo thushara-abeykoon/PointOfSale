@@ -69,7 +69,7 @@ public class SettingsFormController {
             txtFname.requestFocus();
         else if (txtLname.getText().isEmpty()) {
             txtLname.requestFocus();
-        } else if (txtEmail.getText().isEmpty() || RegisterValidation.isvalidEmail(txtEmail.getText()) || RegisterFormController.isEmailExists(txtEmail.getText())) {
+        } else if (txtEmail.getText().isEmpty() || RegisterValidation.isvalidEmail(txtEmail.getText())) {
             txtEmail.clear();
             txtEmail.requestFocus();
         } else if (txtPhoneNo.getText().isEmpty() || RegisterValidation.invalidMobileNumber(txtPhoneNo.getText())) {

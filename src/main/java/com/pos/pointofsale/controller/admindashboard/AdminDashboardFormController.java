@@ -1,5 +1,6 @@
 package com.pos.pointofsale.controller.admindashboard;
 
+import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.tasks.AdminRevenueUpdater;
 import com.pos.pointofsale.tasks.AdminTotalOrdersUpdater;
@@ -56,10 +57,10 @@ public class AdminDashboardFormController {
             if(sumResults.next()&& sumResults.getString(1)!=null&& countResults.next()) {
                 double sum = sumResults.getDouble(1);
                 double count = countResults.getDouble(1);
-                lblAverageDailyRevenue.setText(sum / count +" LKR");
+                lblAverageDailyRevenue.setText(ControllerCommon.getCorrectPriceFormat(sum / count) +" LKR");
             }
             else
-                lblAverageDailyRevenue.setText("0.0 LKR");
+                lblAverageDailyRevenue.setText("0.00 LKR");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

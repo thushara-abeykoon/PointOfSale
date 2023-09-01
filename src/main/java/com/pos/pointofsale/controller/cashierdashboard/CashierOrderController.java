@@ -152,7 +152,7 @@ public class CashierOrderController {
         else{
             loadTableData();
             total += Double.parseDouble(txtTotal.getText());
-            lblTotalPrice.setText("TOTAL = "+getCorrectTotalPriceFormat(total)+" LKR");
+            lblTotalPrice.setText("TOTAL = "+ ControllerCommon.getCorrectPriceFormat(total)+" LKR");
             onTableValueEntered();
         }
     }
@@ -181,22 +181,10 @@ public class CashierOrderController {
         else{
             double price = Double.parseDouble(txtItemPrice.getText());
             double quantity = Double.parseDouble(txtItemQuantity.getText());
-            txtTotal.setText(getCorrectTotalPriceFormat(price*quantity));
+            txtTotal.setText(ControllerCommon.getCorrectPriceFormat(price*quantity));
         }
     }
 
-    public String getCorrectTotalPriceFormat(double total){
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        String totalValueString = decimalFormat.format(total);
-        if(!totalValueString.contains("."))
-            return totalValueString + ".00";
-        else if (totalValueString.substring(totalValueString.length()-2).contains(".")) {
-            return totalValueString + "0";
-        }
-        else {
-            return totalValueString;
-        }
-    }
 
     public void btnCheckoutOnAction() {
 

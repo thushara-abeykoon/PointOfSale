@@ -1,5 +1,6 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
+import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.database.DatabaseConnector;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -69,10 +70,10 @@ public class CashierDashBoardController {
             if(resultSet.next()&& resultSet.getString(1)!=null&& resultSet1.next()) {
                 double sum = resultSet.getDouble(1);
                 double count = resultSet1.getDouble(1);
-                lblAverageDailyRevenue.setText(sum / count +" LKR");
+                lblAverageDailyRevenue.setText(ControllerCommon.getCorrectPriceFormat(sum / count) +" LKR");
             }
             else
-                lblAverageDailyRevenue.setText("0.0 LKR");
+                lblAverageDailyRevenue.setText("0.00 LKR");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

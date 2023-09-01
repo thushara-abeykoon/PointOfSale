@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 
 public class ControllerCommon {
     public static Connection connection = DatabaseConnector.getInstance().getConnection();
@@ -102,5 +103,15 @@ public class ControllerCommon {
                 keyEvent.consume();
         });
     }
-
+    public static String getCorrectPriceFormat(double total) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String totalValueString = decimalFormat.format(total);
+        if (!totalValueString.contains("."))
+            return totalValueString + ".00";
+        else if (totalValueString.substring(totalValueString.length() - 2).contains(".")) {
+            return totalValueString + "0";
+        } else {
+            return totalValueString;
+        }
+    }
 }

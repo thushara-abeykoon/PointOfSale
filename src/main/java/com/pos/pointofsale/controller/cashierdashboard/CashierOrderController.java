@@ -4,6 +4,7 @@ import com.pos.pointofsale.controller.ControllerCommon;
 import com.pos.pointofsale.database.DatabaseConnector;
 import com.pos.pointofsale.model.InvoiceOrderItems;
 import com.pos.pointofsale.model.OrderTable;
+import com.pos.pointofsale.tasks.PrintInvoice;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -263,26 +264,9 @@ public class CashierOrderController {
     }
 
     public void printInvoice() throws SQLException {
-        String jrxmlPath = "E:\\PROJECTS\\JavaFX Projects\\PointOfSale\\src\\main\\resources\\com\\pos\\pointofsale\\jasper\\invoice.jrxml";
-        Map<String,Object> parameters = new HashMap<>();
-        parameters.put("orderId",lblOrderId.getText());
-        parameters.put("totalAmount",lblTotalPrice.getText());
-        List<InvoiceOrderItems> orderItemsList = new ArrayList<>();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT order_item.itm_id,i.itm_name, i.price, order_item.quantity, order_item.quantity*i.price as total FROM order_item JOIN item i on i.itm_id = order_item.itm_id  WHERE order_id = ?");
-        preparedStatement.setObject(1,lblOrderId.getText());
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            System.out.println(resultSet.getString(1) + resultSet.getString(2) + resultSet.getString(3) + resultSet.getString(4) + resultSet.getString(5));
-            orderItemsList.add(new InvoiceOrderItems(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5)));
-        }
-        JRBeanCollectionDataSource orderItems = new JRBeanCollectionDataSource(orderItemsList);
-        parameters.put("OrderItems",orderItems);
-        try {
-            JasperReport report = JasperCompileManager.compileReport(jrxmlPath);
-            JasperPrint print = JasperFillManager.fillReport(report,parameters,new JREmptyDataSource());
-            JasperExportManager.exportReportToPdfFile(print,"E:\\PROJECTS\\JavaFX Projects\\PointOfSale\\src\\main\\resources\\com\\pos\\pointofsale\\jasper\\invoice.pdf");
-        } catch (JRException e) {
-            throw new RuntimeException(e);
-        }
+        PrintInvoice printInvoice = new PrintInvoice(lblOrderId.getText(),lblTotalPrice.getText(),CashierFormController.printService);
+        Thread thread = new Thread(printInvoice);
+        thread.setDaemon(true);
+        thread.start();
     }
 }

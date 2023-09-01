@@ -31,4 +31,13 @@ public class AdminFormController extends CashierFormController {
         DashboardStyleConfiguration.setPaneBackground(paneHistory,"#282929");
     }
 
+    @Override
+    public void paneLogOutOnMoseClicked() {
+        super.paneLogOutOnMoseClicked();
+        AdminDashboardFormController.adminRevenueUpdater1.cancel();
+        AdminDashboardFormController.adminRevenueUpdater2.cancel();
+        AdminDashboardFormController.adminTotalOrdersUpdater.cancel();
+        AdminDashboardFormController.timer1.purge();
+        AdminDashboardFormController.timer2.purge();
+    }
 }

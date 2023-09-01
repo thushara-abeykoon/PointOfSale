@@ -23,6 +23,11 @@ public class AdminDashboardFormController {
     public Label lblDailyTotalOrders;
 
     private final Connection connection = DatabaseConnector.getInstance().getConnection();
+    public static AdminRevenueUpdater adminRevenueUpdater1;
+    public static AdminRevenueUpdater adminRevenueUpdater2;
+    public static AdminTotalOrdersUpdater adminTotalOrdersUpdater;
+    public static Timer timer1;
+    public static Timer timer2;
 
     public void initialize(){
         setLblTodayRevenue();
@@ -35,14 +40,14 @@ public class AdminDashboardFormController {
         setLblNoOfComputers();
     }
     private void setLblTodayRevenue(){
-        AdminRevenueUpdater adminRevenueUpdater = new AdminRevenueUpdater("curdate()",lblTodayRevenue);
-        Timer timer = new Timer();
-        timer.schedule(adminRevenueUpdater,0,1000);
+        adminRevenueUpdater1 = new AdminRevenueUpdater("curdate()",lblTodayRevenue);
+        timer1 = new Timer();
+        timer1.schedule(adminRevenueUpdater1,0,1000);
     }
 
     private void setLblYesterdayRevenue(){
-        AdminRevenueUpdater adminRevenueUpdater = new AdminRevenueUpdater("DATE_SUB(CURDATE(), INTERVAL 1 DAY)",lblYesterdayRevenue);
-        lblYesterdayRevenue.setText(adminRevenueUpdater.getRevenue());
+        adminRevenueUpdater2 = new AdminRevenueUpdater("DATE_SUB(CURDATE(), INTERVAL 1 DAY)",lblYesterdayRevenue);
+        lblYesterdayRevenue.setText(adminRevenueUpdater2.getRevenue());
     }
 
     private void setLblAverageDailyRevenue(){
@@ -104,13 +109,9 @@ public class AdminDashboardFormController {
         }
     }
     public void setLblDailyTotalOrders() {
-        AdminTotalOrdersUpdater adminTotalOrdersUpdater = new AdminTotalOrdersUpdater(lblDailyTotalOrders);
-        Timer timer = new Timer();
-        timer.schedule(adminTotalOrdersUpdater,0,1000);
-        Runtime.getRuntime().addShutdownHook(new Thread(()->{
-            adminTotalOrdersUpdater.cancel();
-            timer.purge();
-        }));
+        adminTotalOrdersUpdater = new AdminTotalOrdersUpdater(lblDailyTotalOrders);
+        timer2 = new Timer();
+        timer2.schedule(adminTotalOrdersUpdater,0,1000);
     }
 
     public void setLblNoOfEmployees(){

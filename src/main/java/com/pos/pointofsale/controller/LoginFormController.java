@@ -1,10 +1,7 @@
 package com.pos.pointofsale.controller;
 
 import com.pos.pointofsale.StageController;
-import com.pos.pointofsale.controller.admindashboard.AdminDashboardFormController;
-import com.pos.pointofsale.controller.admindashboard.AdminFormController;
 import com.pos.pointofsale.controller.cashierdashboard.CashierFormController;
-import com.pos.pointofsale.controller.cashierdashboard.CashierHistoryController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.scene.Scene;
@@ -191,6 +188,7 @@ public class LoginFormController {
 
     public void icnCloseOnClicked() {
         StageController.closeStage(root);
+        System.exit(0);
     }
 
     public void icnCloseOnMouseExited() {

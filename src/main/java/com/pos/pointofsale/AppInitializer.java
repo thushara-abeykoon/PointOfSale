@@ -1,14 +1,12 @@
 package com.pos.pointofsale;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -22,7 +20,7 @@ public class AppInitializer extends Application {
         stage.setScene(scene);
         stage.setTitle("Login");
         stage.setResizable(false);
-        stage.getIcons().add(new Image(this.getClass().getResource("images/icn.png").openStream()));
+        stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("images/icn.png")).openStream()));
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 

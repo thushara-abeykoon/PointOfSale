@@ -26,18 +26,6 @@ public class AppInitializer extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent windowEvent) {
-                System.out.println();
-            }
-        });
-
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("Shutdown hook is running. Performing cleanup...");
-            // Add your cleanup code here.
-        }));
-
     }
 
     public static void main(String[] args) {

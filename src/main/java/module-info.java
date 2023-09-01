@@ -20,5 +20,7 @@ module com.pos.pointofsale {
     opens com.pos.pointofsale.controller.cashierdashboard to javafx.fxml;
     opens com.pos.pointofsale.controller.admindashboard to javafx.fxml;
     exports com.pos.pointofsale.controller.admindashboard;
+    exports com.pos.pointofsale.tasks;
+    opens com.pos.pointofsale.tasks to javafx.fxml;
 
 }

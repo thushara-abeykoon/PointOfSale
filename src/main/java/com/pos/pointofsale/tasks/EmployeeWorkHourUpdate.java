@@ -1,4 +1,4 @@
-package com.pos.pointofsale.controller;
+package com.pos.pointofsale.tasks;
 
 import com.pos.pointofsale.database.DatabaseConnector;
 

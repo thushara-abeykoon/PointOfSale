@@ -1,7 +1,7 @@
 package com.pos.pointofsale.controller.cashierdashboard;
 
 import com.pos.pointofsale.StageController;
-import com.pos.pointofsale.controller.EmployeeWorkHourUpdate;
+import com.pos.pointofsale.tasks.EmployeeWorkHourUpdate;
 import com.pos.pointofsale.controller.LoginFormController;
 import com.pos.pointofsale.database.DatabaseConnector;
 import javafx.animation.KeyFrame;

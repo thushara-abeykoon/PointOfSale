@@ -1,6 +1,8 @@
 package com.pos.pointofsale.controller.admindashboard;
 
 import com.pos.pointofsale.database.DatabaseConnector;
+import com.pos.pointofsale.tasks.AdminRevenueUpdater;
+import com.pos.pointofsale.tasks.AdminTotalOrdersUpdater;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 

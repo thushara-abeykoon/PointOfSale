@@ -18,6 +18,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ import java.util.Arrays;
 import java.util.Timer;
 
 public class CashierFormController extends DashboardStyleConfiguration {
-    public static PrintService printService;
+    public static PrintService printService = PrintServiceLookup.lookupDefaultPrintService();
 
     public VBox vboxLeft;
     public ImageView imgMore;

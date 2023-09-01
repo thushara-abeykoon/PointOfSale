@@ -86,12 +86,10 @@ public class SettingsForm {
         PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null,null);
         ObservableList<PrinterComboBox> items = cmbPrinter.getItems();
         items.clear();
-        for (PrintService printService : printServices) {
-            if (printService == PrintServiceLookup.lookupDefaultPrintService())
-                continue;
+        for (PrintService printService : printServices)
             items.add(new PrinterComboBox(printService, printService.getName()));
-        }
-        cmbPrinter.setValue((CashierFormController.printService!=null)?new PrinterComboBox(CashierFormController.printService,CashierFormController.printService.getName()):new PrinterComboBox(defaultPrinter,defaultPrinter.getName()));
+
+        cmbPrinter.setValue(new PrinterComboBox(CashierFormController.printService,CashierFormController.printService.getName()));
     }
 
     public void selectDefaultPrinter(){

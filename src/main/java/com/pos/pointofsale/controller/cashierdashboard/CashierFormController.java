@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import javax.print.PrintService;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 import java.util.Timer;
 
 public class CashierFormController extends DashboardStyleConfiguration {
+    public static PrintService printService;
 
     public VBox vboxLeft;
     public ImageView imgMore;
@@ -130,7 +132,7 @@ public class CashierFormController extends DashboardStyleConfiguration {
 
 
     public void paneSettingsOnMouseClicked( ) {
-        paneLoader("view/CashierSettingsForm.fxml");
+        paneLoader("view/SettingsForm.fxml");
         setPaneActive(4);
         DashboardStyleConfiguration.setPaneBackground(paneSettings,"#282929");
     }

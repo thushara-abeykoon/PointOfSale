@@ -37,7 +37,7 @@ public class AdminFormController extends CashierFormController {
 
     @Override
     public void paneSettingsOnMouseClicked(){
-        paneLoader("view/AdminSettingsForm.fxml");
+        paneLoader("view/SettingsForm.fxml");
         setPaneActive(4);
         DashboardStyleConfiguration.setPaneBackground(paneSettings,"#282929");
     }

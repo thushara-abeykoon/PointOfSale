@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 public class ControllerCommon {
     public static Connection connection = DatabaseConnector.getInstance().getConnection();
@@ -59,7 +60,7 @@ public class ControllerCommon {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select "+columnName+" from "+tableName+" order by "+columnName+" desc limit 1;");
 
-            if (resultSet.next()) {
+            if (resultSet.next() && !Objects.equals(resultSet.getString(1), "admin")){
                 empId = resultSet.getString(1);
                 String empIdInt = Integer.toString(Integer.parseInt(empId.substring(3))+1);
                 if (empId.length()-empIdInt.length()<3)

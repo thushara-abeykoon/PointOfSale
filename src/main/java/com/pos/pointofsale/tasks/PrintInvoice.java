@@ -39,7 +39,7 @@ public class PrintInvoice extends Task<Void> {
 
     private void print(){
         try {
-            String jrxmlPath = "E:\\PROJECTS\\JavaFX Projects\\PointOfSale\\src\\main\\resources\\com\\pos\\pointofsale\\jasper\\invoice.jrxml";
+            String jrxmlPath = "src/main/resources/com/pos/pointofsale/jasper/invoice.jrxml";
             Map<String,Object> parameters = new HashMap<>();
             parameters.put("orderId",orderId);
             parameters.put("totalAmount",totalPrice);
@@ -55,7 +55,7 @@ public class PrintInvoice extends Task<Void> {
             parameters.put("OrderItems",orderItems);
             JasperReport report = JasperCompileManager.compileReport(jrxmlPath);
             JasperPrint print = JasperFillManager.fillReport(report,parameters,new JREmptyDataSource());
-            JasperExportManager.exportReportToPdfFile(print,"E:\\PROJECTS\\JavaFX Projects\\PointOfSale\\src\\main\\resources\\com\\pos\\pointofsale\\jasper\\invoice.pdf");
+            JasperExportManager.exportReportToPdfFile(print,"src/main/resources/com/pos/pointofsale/jasper/invoice.pdf");
 
 
             //Code to print
